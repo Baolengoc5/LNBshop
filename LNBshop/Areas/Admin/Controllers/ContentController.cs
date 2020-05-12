@@ -13,5 +13,9 @@ namespace LNBshop.Areas.Admin.Controllers
         {
             return View();
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
     }
 }
