@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title>@ViewBag.Title-LNBshop</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/Assets/Client/HomePage/startbootstrap-shop-homepage-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/Assets/Client/HomePage/startbootstrap-shop-homepage-gh-pages/css/shop-homepage.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            @Html.ActionLink("LNBshop", "Index", "Home", null, new { @class = "navbar-brand" })
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Trang chủ", "Index", "Home", null, new { @class = "nav-link text-light" })
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
+                            Đồ tập nam
+                        </a>
+                        <div class="dropdown-menu bg-dark">
+                            <a class="dropdown-item text-light" href="#">Áo tập nam</a>
+                            <a class="dropdown-item text-light" href="#">Áo khoác nam</a>
+                            <a class="dropdown-item text-light" href="#">Quần tập nam</a>
+                            <a class="dropdown-item text-light" href="#">Đồ bộ tập nam</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
+                            Đồ tập nữ
+                        </a>
+                        <div class="dropdown-menu bg-dark">
+                            <a class="dropdown-item text-light" href="#">Quần tập nữ</a>
+                            <a class="dropdown-item text-light" href="#">Áo khoác nữ</a>
+                            <a class="dropdown-item text-light" href="#">Quần tập nữ</a>
+                            <a class="dropdown-item text-light" href="#">Đồ bộ tập nữ</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
+                            Đồ thể thao
+                        </a>
+                        <div class="dropdown-menu bg-dark">
+                            <a class="dropdown-item text-light" href="#">Đồ thể thao nam</a>
+                            <a class="dropdown-item text-light" href="#">Đồ thể thao nữ</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
+                            Phụ kiện
+                        </a>
+                        <div class="dropdown-menu bg-dark">
+                            <a class="dropdown-item text-light" href="#">Tập gym</a>
+                            <a class="dropdown-item text-light" href="#">Tập yoga</a>
+                            <a class="dropdown-item text-light" href="#">Túi thể thao</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="navbardrop" data-toggle="dropdown">
+                            Thông tin-Liên hệ
+                        </a>
+                        <div class="dropdown-menu bg-dark">
+                            @Html.ActionLink("Thới thiệu", "About", "Home", null, new { @class = "dropdown-item text-light" })
+                            @Html.ActionLink("Liên hệ", "Contact", "Home", null, new { @class = "dropdown-item text-light" })
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            <img src="https://img.icons8.com/material-sharp/24/000000/settings.png" />
+                        </a>
+                        <div class="dropdown-menu bg-dark">
+                            @Html.ActionLink("Đăng nhập", "Index", "Login", new { area = "Admin" }, new { @class = "dropdown-item text-light" })
+                            @Html.ActionLink("Đăng ký", "registrater", "Home", null, new { @class = "dropdown-item text-light" })
+                            @Html.ActionLink("Đăng xuất", "Logout", "Login", null, new { @class = "dropdown-item text-light" })
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div>
+        @RenderBody()
+    </div>
+    <!-- /.container -->
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; LNBsports_shop @DateTime.Now.Year</p>
+
+        </div>
+        <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/Assets/Client/HomePage/startbootstrap-shop-homepage-gh-pages/vendor/jquery/jquery.min.js"></script>
+    <script src="/Assets/Client/HomePage/startbootstrap-shop-homepage-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
