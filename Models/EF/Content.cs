@@ -5,6 +5,7 @@ namespace Models.EF
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web;
 
     [Table("Content")]
     public partial class Content
@@ -21,6 +22,9 @@ namespace Models.EF
         public string Description { get; set; }
 
         [StringLength(250)]
+        [DataType(DataType.Upload)]
+        [Display(Name = "Upload File")]
+        [Required(ErrorMessage = "Please choose file to upload.")]
         public string Image { get; set; }
 
         public long CategoryID { get; set; }
