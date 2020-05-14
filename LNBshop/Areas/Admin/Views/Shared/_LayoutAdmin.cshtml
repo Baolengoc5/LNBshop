@@ -22,6 +22,7 @@
     <!-- Custom styles for this template-->
     <link href="~/Assets/Admin/css/sb-admin-2.css" rel="stylesheet">
 
+    <script src="~/Assets/Admin/js/plugins/ckeditor/ckeditor.js"></script>
 </head>
 
 <body id="page-top">
@@ -44,7 +45,7 @@
                     <i class="fas fa-fw fa-tachometer-alt text-white"></i>
                     @Html.ActionLink("Dashboard", "Index", "Home", null, new { @class = "text-white" })
                 </div>
-                
+
                 </a>
             </li>
 
@@ -327,7 +328,7 @@
                 </nav>
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
-                <h1>@RenderSection("header",required:true)</h1>
+                <h1>@RenderSection("header", required: true)</h1>
                 @RenderBody()
                 <!-- /.container-fluid -->
 
@@ -379,6 +380,7 @@
     <!-- Core plugin JavaScript-->
     <script src="~/Assets/Admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
+
     <!-- Custom scripts for all pages-->
     <script src="~/Assets/Admin/js/sb-admin-2.min.js"></script>
 
@@ -388,7 +390,7 @@
     <!-- Page level custom scripts -->
     <script src="~/Assets/Admin/js/demo/chart-area-demo.js"></script>
     <script src="~/Assets/Admin/js/demo/chart-pie-demo.js"></script>
-
+    @RenderSection("jsfooter", required: false);
 </body>
 
 </html>

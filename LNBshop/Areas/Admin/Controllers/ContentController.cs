@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace LNBshop.Areas.Admin.Controllers
 {
-    public class ContentController : BaseController
+    public class ContentController : Controller
     {
         // GET: Admin/Content
         public ActionResult Index()
@@ -39,13 +39,13 @@ namespace LNBshop.Areas.Admin.Controllers
                         if (Image != null)
                         {
                             //, Path.GetFileName(Image.FileName)
-                            string path = Path.Combine(Server.MapPath("~/Data/"));
+                            string path = Path.Combine(Server.MapPath("~/Data/Image/Content/"));
                             string strExtexsion = Path.GetExtension(Path.GetFileName(Image.FileName)).Trim();
                             content.CreatedDate = DateTime.Now;
                             
 
                             long id = dao.Insert(content);
-                            content.Image = "/Data/" + content.ID + strExtexsion;
+                            content.Image = "/Data/Image/Content/" + content.ID + strExtexsion;
                             dao.Update(content);
                             if (id > 0)
                             {
