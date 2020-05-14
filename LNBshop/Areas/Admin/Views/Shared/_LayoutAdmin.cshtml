@@ -40,9 +40,11 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
+                <div class="nav-link">
+                    <i class="fas fa-fw fa-tachometer-alt text-white"></i>
+                    @Html.ActionLink("Dashboard", "Index", "Home", null, new { @class = "text-white" })
+                </div>
+                
                 </a>
             </li>
 
@@ -65,8 +67,6 @@
                         <h6 class="collapse-header">Quản lý tài khoản:</h6>
                         @Html.ActionLink("Danh sách", "Index", "User", null, new { @class = "collapse-item" })
                         @Html.ActionLink("Tạo tài khoản", "Create", "User", null, new { @class = "collapse-item" })
-                        @*<a class="collapse-item" href="buttons.html">Buttons</a>
-        <a class="collapse-item" href="cards.html">Cards</a>*@
                     </div>
                 </div>
             </li>
@@ -317,7 +317,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                @*@Html.ActionLink("Đăng xuất", "Logout", "Home", null, new { @class = "dropdown-item" });*@
+                                @Html.ActionLink("Đăng xuất", "Logout", "Login", null, new { @class = "dropdown-item" });
 
                             </div>
                         </li>

@@ -61,10 +61,13 @@
                                     }
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Quên mật khẩu?</a>
+                                        @Html.ActionLink("Quên mật khẩu", "Index", "ForgotPassword", null, new { @class = "small" })
                                     </div>
                                     <div class="text-center">
-                                        @Html.ActionLink("Tạo tài khoản", "Registrater", "Home", null, new { @class = "small" })
+                                        @Html.ActionLink("Đăng ký tài khoản", "Index", "Register", null, new { @class = "small" })
+                                    </div>
+                                    <div class="text-center">
+                                        @Html.ActionLink("Trang chủ", "Index", "Home", new { area = "" }, new { @class = "small" })
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +83,6 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="~/Assets/Admin/vendor/jquery/jquery.min.js"></script>
-    @*<script src="~/Areas/Admin/Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>*@
 
     <!-- Core plugin JavaScript-->
     <script src="~/Assets/Admin/vendor/jquery-easing/jquery.easing.min.js"></script>

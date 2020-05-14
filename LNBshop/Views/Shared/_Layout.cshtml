@@ -85,8 +85,8 @@
                         </a>
                         <div class="dropdown-menu bg-dark">
                             @Html.ActionLink("Đăng nhập", "Index", "Login", new { area = "Admin" }, new { @class = "dropdown-item text-light" })
-                            @Html.ActionLink("Đăng ký", "registrater", "Home", null, new { @class = "dropdown-item text-light" })
-                            @Html.ActionLink("Đăng xuất", "Logout", "Login", null, new { @class = "dropdown-item text-light" })
+                            @Html.ActionLink("Đăng ký", "Index", "Register", new { area = "Admin" }, new { @class = "dropdown-item text-light" })
+                            @Html.ActionLink("Đăng xuất", "Logout", "Login", new { area = "Admin" }, new { @class = "dropdown-item text-light" })
                         </div>
                     </li>
                 </ul>
