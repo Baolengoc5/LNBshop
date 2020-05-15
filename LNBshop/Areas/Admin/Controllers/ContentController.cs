@@ -22,6 +22,7 @@ namespace LNBshop.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Create(HttpPostedFileBase Image,Content content)
         {
             if (ModelState.IsValid)
