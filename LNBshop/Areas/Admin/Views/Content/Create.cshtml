@@ -10,6 +10,7 @@
 }
 
 @{
+    //Bỏ mã hóa html trong form này
     Html.EnableClientValidation(false);
     Html.EnableUnobtrusiveJavaScript(false);
 
@@ -129,6 +130,7 @@
             @section jsfooter{
 
                 <script>
+                    //Bỏ hàng loạt các mã hóa ký tự trong Ckeditor
                     CKEDITOR.config.pasteFromWordPromptCleanup = true;
                     CKEDITOR.config.pasteFromWordRemoveFontStyles = false;
                     CKEDITOR.config.pasteFromWordRemoveStyles = false;
