@@ -21,7 +21,7 @@
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Tên bài viết: </label>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -29,7 +29,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.MetaTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Meta title: </label>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.MetaTitle, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.MetaTitle, "", new { @class = "text-danger" })
@@ -37,7 +37,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Miêu tả: </label>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
@@ -45,7 +45,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Hình ảnh: </label>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
                     @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
@@ -53,15 +53,15 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Danh mục: </label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.CategoryID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.CategoryID, null, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-2">Detail</label>
+                <label class="control-label col-md-2">Thông tin chi tiết: </label>
                 <div class="col-md-10">
                     @* Phần input sử dụng CKeditor *@
                     @Html.TextAreaFor(model => model.Detail, new { htmlAttributes = new { @class = "ckeditor", @name = "Detail", @id = "Detail" } })
@@ -70,9 +70,9 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Warranty, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Thời hạn bảo hành: </label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Warranty, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Warranty) năm
                     @Html.ValidationMessageFor(model => model.Warranty, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -94,16 +94,6 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.Status)
-                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
                 @Html.LabelFor(model => model.ViewCount, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.ViewCount, new { htmlAttributes = new { @class = "form-control" } })
@@ -121,10 +111,12 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Language, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Language, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Language, "", new { @class = "text-danger" })
-                </div>
+                @Html.DropDownListFor(model => model.Language, new List<SelectListItem>()
+          {
+              new SelectListItem(){Selected = true,Text = "Tiếng việt",Value = "vi"},
+              new SelectListItem(){Selected = true,Text = "English",Value = "en"},
+          }, new { @class = "form-control", @required = "required" })
+                @Html.ValidationMessageFor(model => model.Language, "", new { @class = "text-danger" })
             </div>
 
             @section jsfooter{

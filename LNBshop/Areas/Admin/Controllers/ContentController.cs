@@ -2,6 +2,7 @@
 using Models.EF;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -13,14 +14,39 @@ namespace LNBshop.Areas.Admin.Controllers
     public class ContentController : Controller
     {
         // GET: Admin/Content
-        public ActionResult Index()
+
+        public ActionResult Index(int page = 1, int pageSize = 4)
         {
-            return View();
+            var dao = new ContentDao();
+            var model = dao.ListAllPaging(page, pageSize);
+            return View(model);
         }
         public ActionResult Create()
         {
+            SetViewBag();
             return View();
         }
+
+        public ActionResult Edit( long id)
+        {
+            var dao = new ContentDao();
+            var content = dao.GetByID(id);
+            SetViewBag(content.CategoryID);
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Edit(HttpPostedFileBase Image, Content content)
+        {
+            if (ModelState.IsValid)
+            {
+                
+            }
+            SetViewBag(content.CategoryID);
+            return View();
+        }
+
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Create(HttpPostedFileBase Image,Content content)
@@ -43,11 +69,11 @@ namespace LNBshop.Areas.Admin.Controllers
                             string path = Path.Combine(Server.MapPath("~/Data/Image/Content/"));
                             string strExtexsion = Path.GetExtension(Path.GetFileName(Image.FileName)).Trim();
                             content.CreatedDate = DateTime.Now;
-                            
+                            content.Status = true;
 
                             long id = dao.Insert(content);
                             content.Image = "/Data/Image/Content/" + content.ID + strExtexsion;
-                            dao.Update(content);
+                            dao.UpdateImage(content);
                             if (id > 0)
                             {
                                 Image.SaveAs(path + content.ID + strExtexsion);
@@ -69,7 +95,14 @@ namespace LNBshop.Areas.Admin.Controllers
                     }
                 }
             }
+            SetViewBag();
             return View("Create");
+        }
+        
+        public void SetViewBag(long? selectedid = null)
+        {
+            var dao = new CategoryDao();
+            ViewBag.CategoryID = new SelectList(dao.ListAll(),"ID","Name",selectedid);
         }
     }
 }

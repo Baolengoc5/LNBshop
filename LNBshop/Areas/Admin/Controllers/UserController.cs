@@ -10,7 +10,7 @@ using PagedList;
 
 namespace LNBshop.Areas.Admin.Controllers
 {
-    public class UserController : BaseController
+    public class UserController : Controller
     {
         // GET: Admin/User
         public ActionResult Index(string searchString, int page = 1, int pageSize = 4)
