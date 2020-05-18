@@ -97,5 +97,18 @@ namespace LNBshop.Areas.Admin.Controllers
             new UserDao().Detele(id);
             return RedirectToAction("Index");
         }
+
+        //change status
+
+        [HttpPost]
+        //[HasCredential(RoleID = "EDIT_USER")]
+        public JsonResult ChangeStatus(long id)
+        {
+            var result = new UserDao().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
+        }
     }
 }
