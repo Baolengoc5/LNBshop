@@ -101,7 +101,6 @@ namespace LNBshop.Areas.Admin.Controllers
         //change status
 
         [HttpPost]
-        //[HasCredential(RoleID = "EDIT_USER")]
         public JsonResult ChangeStatus(long id)
         {
             var result = new UserDao().ChangeStatus(id);

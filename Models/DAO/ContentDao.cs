@@ -2,6 +2,7 @@
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,31 +24,59 @@ namespace Models.DAO
             db.SaveChanges();//Lưu thay đổi trong database
             return entity.ID;
         }
-        //public bool Update(Content entity)
-        //{
-            //try
-            //{
-            //    var content = db.Contents.Find(entity.ID);//tìm ID
 
-            //    content.Name = entity.Name;
-            //    content.MetaTitle = entity.MetaTitle;
-            //    content.Description = entity.Description;
-            //    content.Image =
-            //    user.ModifiedBy = entity.ModifiedBy;
-            //    user.ModifiedDate = DateTime.Now;
-            //    user.Status = entity.Status;
-            //    db.SaveChanges();
-            //    return true;
-            //}
-            //catch (Exception ex)//xử lý các trường hợp ngoại lệ
-            //{
-            //    return false;
-            //}
-        //}
+        //Sửa
+        public bool Update(Content entity)
+        {
+            try
+            {
+                var content = db.Contents.Find(entity.ID);//tìm ID
+                if (!string.IsNullOrEmpty(entity.Detail))//kiểm tra nếu người dùng nhập Detail mới thực thi
+                {
+                    content.Detail = entity.Detail;
+                }
 
+                content.Name = entity.Name;
+                content.MetaTitle = entity.MetaTitle;
+                content.Description = entity.Description;
+                content.CategoryID = entity.CategoryID;
 
+                content.Warranty = entity.Warranty;
+                content.ModifiedBy = entity.ModifiedBy;
+                content.ModifiedDate = DateTime.Now;
+                content.MetaKeywords = entity.MetaKeywords;
+                content.MetaDescriptions = entity.MetaDescriptions;
 
-            public bool UpdateImage(Content entityImage)
+                content.Status = entity.Status;
+
+                content.Tags = entity.Tags;
+                content.Language = entity.Language;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)//xử lý các trường hợp ngoại lệ
+            {
+                return false;
+            }
+        }
+
+        //Xóa
+        public bool Detele(int id)
+        {
+            try
+            {
+                var content = db.Contents.Find(id);
+                db.Contents.Remove(content);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateImage(Content entityImage)
             {
                 try
                 {

@@ -27,29 +27,111 @@ namespace LNBshop.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult Edit( long id)
+        [HttpGet]
+        public ActionResult Edit(long id)
         {
             var dao = new ContentDao();
             var content = dao.GetByID(id);
+
+            Session["imgPath"] = content.Image;
             SetViewBag(content.CategoryID);
-            return View();
+
+            return View(content);
         }
 
         [HttpPost]
         [ValidateInput(false)]
+
         public ActionResult Edit(HttpPostedFileBase Image, Content content)
         {
             if (ModelState.IsValid)
             {
-                
+                var dao = new ContentDao();
+
+                try
+                {
+
+                    if (Image != null)
+                    {
+                        //Lấy đuôi file để kiểm tra chỉ lấy hình ảnh
+                        string extension = Path.GetExtension(Image.FileName);
+                        //, Path.GetFileName(Image.FileName)
+                        string path = Path.Combine(Server.MapPath("~/Data/Image/Content/"));
+                        string strExtexsion = Path.GetExtension(Path.GetFileName(Image.FileName)).Trim();
+                        content.CreatedDate = DateTime.Now;
+                        content.Status = true;
+                        //Kiểm tra đuôi file ảnh
+                        if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
+                        {
+                            if (Image.ContentLength <= 500000)// kiểm tra kích thước file nhỏ hơn hoặc bằng 1mb
+                            {
+                                string oldImagePath = Request.MapPath(Session["imgPath"].ToString());
+                                var result = dao.Update(content);
+                                content.Image = "/Data/Image/Content/" + content.ID + strExtexsion;
+                                dao.UpdateImage(content);
+                                if (result)
+                                {
+                                    if (System.IO.File.Exists(oldImagePath))
+                                    {
+                                        System.IO.File.Delete(oldImagePath);
+                                    }
+                                    Image.SaveAs(path + content.ID + strExtexsion);
+                                    
+                                    ModelState.Clear();
+
+                                    return RedirectToAction("Index", "Content");
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError("", "Thêm tin tức không thành công");
+                                }
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", "Kích thước file phải nhỏ hơn hoặc bằng 5mb");
+                            }
+
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Bạn phải chọn hình ảnh, các đuôi .jpg/.jpeg/.png");
+                        }
+
+
+                    }
+                    else
+                    {
+                        content.Image = Session["imgPath"].ToString();
+
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    ViewBag.FileStatus = "Error while file uploading.";
+                }
+
             }
-            SetViewBag(content.CategoryID);
-            return View();
+            SetViewBag();
+            return View("Edit");
         }
 
+        [HttpDelete]
+        public ActionResult Delete(int id, Content content)
+        {
+            new ContentDao().Detele(id);
+
+                string currentImg = Request.MapPath(content.Image);
+                if (System.IO.File.Exists(currentImg))
+                {
+                    System.IO.File.Delete(currentImg);
+                }
+                return RedirectToAction("Index", "Content");
+        }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(HttpPostedFileBase Image,Content content)
+        public ActionResult Create(HttpPostedFileBase Image, Content content)
         {
             if (ModelState.IsValid)
             {
@@ -65,28 +147,47 @@ namespace LNBshop.Areas.Admin.Controllers
 
                         if (Image != null)
                         {
+                            //Lấy đuôi file để kiểm tra chỉ lấy hình ảnh
+                            string extension = Path.GetExtension(Image.FileName);
                             //, Path.GetFileName(Image.FileName)
                             string path = Path.Combine(Server.MapPath("~/Data/Image/Content/"));
                             string strExtexsion = Path.GetExtension(Path.GetFileName(Image.FileName)).Trim();
                             content.CreatedDate = DateTime.Now;
                             content.Status = true;
-
-                            long id = dao.Insert(content);
-                            content.Image = "/Data/Image/Content/" + content.ID + strExtexsion;
-                            dao.UpdateImage(content);
-                            if (id > 0)
+                            //Kiểm tra đuôi file ảnh
+                            if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
                             {
-                                Image.SaveAs(path + content.ID + strExtexsion);
+                                if (Image.ContentLength <= 500000)// kiểm tra kích thước file nhỏ hơn hoặc bằng 1mb
+                                {
+                                    long id = dao.Insert(content);
+                                    content.Image = "/Data/Image/Content/" + content.ID + strExtexsion;
+                                    dao.UpdateImage(content);
+                                    if (id > 0)
+                                    {
+                                        Image.SaveAs(path + content.ID + strExtexsion);
+                                        ModelState.Clear();
 
-                                return RedirectToAction("Index", "Content");
+                                        return RedirectToAction("Index", "Content");
+                                    }
+                                    else
+                                    {
+                                        ModelState.AddModelError("", "Thêm tin tức không thành công");
+                                    }
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError("", "Kích thước file phải nhỏ hơn hoặc bằng 5mb");
+                                }
+
                             }
                             else
                             {
-                                ModelState.AddModelError("", "Thêm tin tức không thành công");
+                                ModelState.AddModelError("", "Bạn phải chọn hình ảnh, các đuôi .jpg/.jpeg/.png");
                             }
-                            
+
+
                         }
-                        
+
                     }
                     catch (Exception)
                     {
@@ -98,11 +199,11 @@ namespace LNBshop.Areas.Admin.Controllers
             SetViewBag();
             return View("Create");
         }
-        
+
         public void SetViewBag(long? selectedid = null)
         {
             var dao = new CategoryDao();
-            ViewBag.CategoryID = new SelectList(dao.ListAll(),"ID","Name",selectedid);
+            ViewBag.CategoryID = new SelectList(dao.ListAll(), "ID", "Name", selectedid);
         }
     }
 }
