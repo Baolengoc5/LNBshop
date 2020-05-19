@@ -9,17 +9,19 @@
     Danh sách tài khoản
 }
 @section jsfooter{
-    <script src="~/Assets/Admin/js/Controller/userController.js"></script>
+    <script src="~/Assets/Admin/js/Controller/ChangeStatus.js"></script>
 }
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Danh sách User</h6>
     </div>
     <div class="card-body">
+        <a href="/Admin/User/Create">Thêm tài khoản</a>
+
         @using (Html.BeginForm("Index", "User", FormMethod.Get))
         {
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="input-group">
                         <!--Truyền value để lưu giữ giá trị search trên khung tìm kiếm"-->
                         <input type="text" value="@ViewBag.SearchString" name="searchString" class="form-control bg-light border-0 small" placeholder="Tìm kiếm thông qua Tên người dùng hoặc tên đăng nhập  ..." />
@@ -37,6 +39,7 @@
             <table class="table table-striped table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>Thao tác</th>
                         <th>Tài khoản</th>
                         <th>Tên</th>
                         <th>Email</th>
@@ -45,6 +48,7 @@
                 </thead>
                 <tfoot>
                     <tr>
+                        <th>Thao tác</th>
                         <th>Tài khoản</th>
                         <th>Tên</th>
                         <th>Email</th>
@@ -70,7 +74,8 @@
                             <td>@item.UserName</td>
                             <td>@item.Name</td>
                             <td>@item.Email</td>
-                            <td><a href="#" class="btn-active" data-id="@item.ID">@Html.Raw(item.Status ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>                        </tr>
+                            <td><a href="#" class="btnUser-active" data-id="@item.ID">@Html.Raw(item.Status ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
+                        </tr>
                     }
                 </tbody>
             </table>

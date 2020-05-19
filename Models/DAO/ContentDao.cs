@@ -77,38 +77,46 @@ namespace Models.DAO
         }
 
         public bool UpdateImage(Content entityImage)
+        {
+            try
             {
-                try
-                {
-                    var content = db.Contents.Find(entityImage.ID);//tìm ID
-                    content.Image = entityImage.Image;
-                    db.SaveChanges();
-                    return true;
-                }
-                catch (Exception ex)//xử lý các trường hợp ngoại lệ
-                {
-                    return false;
-                }
+                var content = db.Contents.Find(entityImage.ID);//tìm ID
+                content.Image = entityImage.Image;
+                db.SaveChanges();
+                return true;
             }
-
-            //Hiển thị danh sách
-            public IEnumerable<Content> ListAllPaging(int page, int pageSize)
+            catch (Exception ex)//xử lý các trường hợp ngoại lệ
             {
-                //OrderByDescending(x=>x.CreatedDate) là sắp xếp theo ngày tạo
-                return db.Contents.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
-            }
-
-
-
-            public int CountContentName(string contentName)//Kiểm tra tên đăng nhập có bị trùng lặp không
-            {
-                return db.Contents.Count(x => x.Name == contentName);
-            }
-
-            public Content GetByID(long id)//để lấy thông tin tin tức thông qua id 
-            {
-                return db.Contents.Find(id);
-                //SingleOrDefault : lấy một bảng ghi đơn thông qua id truyền vào
+                return false;
             }
         }
+
+        //Hiển thị danh sách
+        public IEnumerable<Content> ListAllPaging(int page, int pageSize)
+        {
+            //OrderByDescending(x=>x.CreatedDate) là sắp xếp theo ngày tạo
+            return db.Contents.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+        }
+
+
+
+        public int CountContentName(string contentName)//Kiểm tra tên đăng nhập có bị trùng lặp không
+        {
+            return db.Contents.Count(x => x.Name == contentName);
+        }
+
+        public Content GetByID(long? id)//để lấy thông tin tin tức thông qua id 
+        {
+            return db.Contents.Find(id);
+            //SingleOrDefault : lấy một bảng ghi đơn thông qua id truyền vào
+        }
+
+        public bool ChangeStatus(long id)
+        {
+            var content = db.Contents.Find(id);
+            content.Status = !content.Status;
+            db.SaveChanges();
+            return content.Status;
+        }
     }
+}

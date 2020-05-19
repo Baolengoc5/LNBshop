@@ -139,6 +139,7 @@
     <Compile Include="Areas\Admin\Controllers\ForgotPasswordController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
@@ -158,7 +159,7 @@
     <Content Include="Assets\Admin\css\sb-admin-2.min.css" />
     <Content Include="Assets\Admin\gulpfile.js" />
     <Content Include="Assets\Admin\img\undraw_posting_photo.svg" />
-    <Content Include="Assets\Admin\js\Controller\userController.js" />
+    <Content Include="Assets\Admin\js\Controller\ChangeStatus.js" />
     <Content Include="Assets\Admin\js\demo\chart-area-demo.js" />
     <Content Include="Assets\Admin\js\demo\chart-bar-demo.js" />
     <Content Include="Assets\Admin\js\demo\chart-pie-demo.js" />
@@ -2357,6 +2358,7 @@
     <Content Include="Areas\Admin\Views\Shared\_TopbarNavbar.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Sidebar.cshtml" />
     <Content Include="Areas\Admin\Views\Content\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

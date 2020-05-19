@@ -6,6 +6,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -28,8 +29,12 @@ namespace LNBshop.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(long id)
+        public ActionResult Edit(long? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("Index", "Content", new { area = "Admin" });
+            }
             var dao = new ContentDao();
             var content = dao.GetByID(id);
 
@@ -102,7 +107,8 @@ namespace LNBshop.Areas.Admin.Controllers
                     else
                     {
                         content.Image = Session["imgPath"].ToString();
-
+                        var result = dao.Update(content);
+                        return RedirectToAction("Index", "Content");
                     }
 
                 }
@@ -204,6 +210,18 @@ namespace LNBshop.Areas.Admin.Controllers
         {
             var dao = new CategoryDao();
             ViewBag.CategoryID = new SelectList(dao.ListAll(), "ID", "Name", selectedid);
+        }
+
+        //change status
+
+        [HttpPost]
+        public JsonResult ChangeStatus(long id)
+        {
+            var result = new ContentDao().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
         }
     }
 }
