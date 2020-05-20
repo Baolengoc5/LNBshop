@@ -24,7 +24,7 @@
                 <div class="col-lg-6">
                     <div class="input-group">
                         <!--Truyền value để lưu giữ giá trị search trên khung tìm kiếm"-->
-                        <input type="text" value="@ViewBag.SearchString" name="searchString" class="form-control bg-light border-0 small" placeholder="Tìm kiếm thông qua Tên người dùng hoặc tên đăng nhập  ..." />
+                        <input type="text" value="@ViewBag.SearchString" name="searchString" class="form-control bg-light border-0 small" placeholder="Tìm kiếm (Tên người dùng hoặc tên đăng nhập)" />
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search fa-sm"></i>
@@ -74,7 +74,7 @@
                             <td>@item.UserName</td>
                             <td>@item.Name</td>
                             <td>@item.Email</td>
-                            <td><a href="#" class="btnUser-active" data-id="@item.ID">@Html.Raw(item.Status ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
+                            <td><strong><a href="#" class="btnUser-active" data-id="@item.ID">@Html.Raw(item.Status ? "Kích hoạt" : "Khoá")</a></strong></td>
                         </tr>
                     }
                 </tbody>

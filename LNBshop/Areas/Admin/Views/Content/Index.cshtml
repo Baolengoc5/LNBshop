@@ -26,7 +26,7 @@
                 <div class="col-lg-12">
                     <div class="input-group">
                         <!--Truyền value để lưu giữ giá trị search trên khung tìm kiếm"-->
-                        <input type="text" value="@ViewBag.SearchString" name="searchString" class="form-control bg-light border-0 small" placeholder="Tìm kiếm thông qua Tên bài viết  ..." />
+                        <input type="text" value="@ViewBag.SearchString" name="searchString" class="form-control bg-light border-0 small" placeholder="Tìm kiếm (Tên bài viết)" />
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search fa-sm"></i>
@@ -75,7 +75,7 @@
                             <td>@item.Name</td>
                             <td><img src="@item.Image" alt="@item.Name" height="84" width="84"></td>
                             <td>@item.CreatedDate</td>
-                            <td><a href="#" class="btnContent-active" data-id="@item.ID">@Html.Raw(item.Status ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
+                            <td><strong><a href="#" class="btnContent-active" data-id="@item.ID">@Html.Raw(item.Status ? "Kích hoạt" : "Khoá")</a></strong></td>
                         </tr>
                     }
                 </tbody>

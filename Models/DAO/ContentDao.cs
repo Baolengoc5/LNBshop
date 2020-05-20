@@ -16,8 +16,7 @@ namespace Models.DAO
         {
             db = new LNBshopDbContext();
         }
-
-        //Thêm
+        
         public long Insert(Content entity)//tạo hàm chức năng Insert kiểu dữ liệu long vì trả về ID kiểu bigint
         {
             db.Contents.Add(entity);//phương thức thêm trong entity
@@ -92,10 +91,17 @@ namespace Models.DAO
         }
 
         //Hiển thị danh sách
-        public IEnumerable<Content> ListAllPaging(int page, int pageSize)
+        
+        public IEnumerable<Content> ListAllPaging(string searchString, int page, int pageSize)
         {
-            //OrderByDescending(x=>x.CreatedDate) là sắp xếp theo ngày tạo
-            return db.Contents.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            IQueryable<Content> model = db.Contents;
+            if (!string.IsNullOrEmpty(searchString))//nếu searchString khác null
+            {
+                model = model.Where(x => x.Name.Contains(searchString));
+                //OrderByDescending(x=>x.CreatedDate) là sắp xếp theo ngày tạo
+                //.Contains(searchString) là tìm kiếm gần giống
+            }
+            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
 
 

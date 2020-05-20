@@ -16,12 +16,16 @@ namespace LNBshop.Areas.Admin.Controllers
     {
         // GET: Admin/Content
 
-        public ActionResult Index(int page = 1, int pageSize = 4)
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 4)
         {
             var dao = new ContentDao();
-            var model = dao.ListAllPaging(page, pageSize);
+            var model = dao.ListAllPaging(searchString, page, pageSize);
+
+            ViewBag.SearchString = searchString;
+
             return View(model);
         }
+
         public ActionResult Create()
         {
             SetViewBag();
@@ -135,6 +139,7 @@ namespace LNBshop.Areas.Admin.Controllers
                 }
                 return RedirectToAction("Index", "Content");
         }
+
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Create(HttpPostedFileBase Image, Content content)

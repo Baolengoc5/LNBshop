@@ -17,115 +17,112 @@ namespace Models.DAO
             db = new LNBshopDbContext();
         }
 
-        public List<Product> ListNewProduct(int top)
+        public long Insert(Product entity)//tạo hàm chức năng Insert kiểu dữ liệu long vì trả về ID kiểu bigint
         {
-            return db.Products.OrderByDescending(x => x.CreatedDate).Take(top).ToList();
+            db.Products.Add(entity);//phương thức thêm trong entity
+            db.SaveChanges();//Lưu thay đổi trong database
+            return entity.ID;
         }
-        public List<string> ListName(string keyword)
+
+        //Sửa
+        public bool Update(Product entity)
         {
-            return db.Products.Where(x => x.Name.Contains(keyword)).Select(x => x.Name).ToList();
+            try
+            {
+                var product = db.Products.Find(entity.ID);//tìm ID
+                if (!string.IsNullOrEmpty(entity.Detail))//kiểm tra nếu người dùng nhập Detail mới thực thi
+                {
+                    product.Detail = entity.Detail;
+                }
+                if (entity.PromotionPrice != null)
+                {
+                    product.PromotionPrice = entity.PromotionPrice;
+                }
+
+                product.Name = entity.Name;
+                product.MetaTitle = entity.MetaTitle;
+                product.Description = entity.Description;
+                product.Price = entity.Price;
+                product.Quantity = entity.Quantity;
+                product.CategoryID = entity.CategoryID;
+                product.Warranty = entity.Warranty;
+
+                product.ModifiedBy = entity.ModifiedBy;
+                product.ModifiedDate = DateTime.Now;
+                product.MetaKeywords = entity.MetaKeywords;
+                product.MetaDescriptions = entity.MetaDescriptions;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)//xử lý các trường hợp ngoại lệ
+            {
+                return false;
+            }
         }
+
+        //Xóa
+        public bool Detele(int id)
+        {
+            try
+            {
+                var product = db.Products.Find(id);
+                db.Products.Remove(product);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateImage(Product entityImage)
+        {
+            try
+            {
+                var content = db.Products.Find(entityImage.ID);//tìm ID
+                content.Image = entityImage.Image;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)//xử lý các trường hợp ngoại lệ
+            {
+                return false;
+            }
+        }
+
+        //Hiển thị danh sách
         public IEnumerable<Product> ListAllPaging(string searchString, int page, int pageSize)
         {
             IQueryable<Product> model = db.Products;
-            if (!string.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))//nếu searchString khác null
             {
-                model = model.Where(x => x.Name.Contains(searchString) || x.Name.Contains(searchString));
+                model = model.Where(x => x.Name.Contains(searchString));
+                //OrderByDescending(x=>x.CreatedDate) là sắp xếp theo ngày tạo
+                //.Contains(searchString) là tìm kiếm gần giống
             }
-
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
-        /// <summary>
-        /// Get list product by category
-        /// </summary>
-        /// <param name="categoryID"></param>
-        /// <returns></returns>
-        public List<ProductViewModel> ListByCategoryId(long categoryID, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+
+
+
+        public int CountProductName(string productName)//Kiểm tra tên đăng nhập có bị trùng lặp không
         {
-            totalRecord = db.Products.Where(x => x.CategoryID == categoryID).Count();
-            var model = (from a in db.Products
-                         join b in db.ProductCategories
-                         on a.CategoryID equals b.ID
-                         where a.CategoryID == categoryID
-                         select new
-                         {
-                             CateMetaTitle = b.MetaTitle,
-                             CateName = b.Name,
-                             CreatedDate = a.CreatedDate,
-                             ID = a.ID,
-                             Images = a.Image,
-                             Name = a.Name,
-                             MetaTitle = a.MetaTitle,
-                             Price = a.Price
-                         }).AsEnumerable().Select(x => new ProductViewModel()
-                         {
-                             CateMetaTitle = x.MetaTitle,
-                             CateName = x.Name,
-                             CreatedDate = x.CreatedDate,
-                             ID = x.ID,
-                             Images = x.Images,
-                             Name = x.Name,
-                             MetaTitle = x.MetaTitle,
-                             Price = x.Price
-                         });
-            model.OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            return model.ToList();
-        }
-        public List<ProductViewModel> Search(string keyword, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
-        {
-            totalRecord = db.Products.Where(x => x.Name == keyword).Count();
-            var model = (from a in db.Products
-                         join b in db.ProductCategories
-                         on a.CategoryID equals b.ID
-                         where a.Name.Contains(keyword)
-                         select new
-                         {
-                             CateMetaTitle = b.MetaTitle,
-                             CateName = b.Name,
-                             CreatedDate = a.CreatedDate,
-                             ID = a.ID,
-                             Images = a.Image,
-                             Name = a.Name,
-                             MetaTitle = a.MetaTitle,
-                             Price = a.Price
-                         }).AsEnumerable().Select(x => new ProductViewModel()
-                         {
-                             CateMetaTitle = x.MetaTitle,
-                             CateName = x.Name,
-                             CreatedDate = x.CreatedDate,
-                             ID = x.ID,
-                             Images = x.Images,
-                             Name = x.Name,
-                             MetaTitle = x.MetaTitle,
-                             Price = x.Price
-                         });
-            model.OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            return model.ToList();
-        }
-        /// <summary>
-        /// List feature product
-        /// </summary>
-        /// <param name="top"></param>
-        /// <returns></returns>
-        public List<Product> ListFeatureProduct(int top)
-        {
-            return db.Products.Where(x => x.TopHot != null && x.TopHot > DateTime.Now).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
-        }
-        public List<Product> ListRelatedProducts(long productId)
-        {
-            var product = db.Products.Find(productId);
-            return db.Products.Where(x => x.ID != productId && x.CategoryID == product.CategoryID).ToList();
+            return db.Contents.Count(x => x.Name == productName);
         }
 
-        public void UpdateImages(long productId, string images)
-        {
-            var product = db.Products.Find(productId);
-            product.MoreImages = images;
-            db.SaveChanges();
-        }
-        public Product ViewDetail(long id)
+        public Product GetByID(long? id)//để lấy thông tin tin tức thông qua id 
         {
             return db.Products.Find(id);
+            //SingleOrDefault : lấy một bảng ghi đơn thông qua id truyền vào
+        }
+
+        public bool ChangeStatus(long id)
+        {
+            var product = db.Products.Find(id);
+            product.Status = !product.Status;
+            db.SaveChanges();
+            return product.Status;
         }
     }
 }

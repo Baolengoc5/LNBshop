@@ -1,17 +1,20 @@
 ﻿using Models.DAO;
+using Models.EF;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
-using System.Xml.Linq;
 
 namespace LNBshop.Areas.Admin.Controllers
 {
     public class ProductController : Controller
     {
-        // GET: Admin/Content
+        // GET: Admin/Product
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
             var dao = new ProductDao();
@@ -27,57 +30,202 @@ namespace LNBshop.Areas.Admin.Controllers
             SetViewBag();
             return View();
         }
-        public JsonResult LoadImages(long id)
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Create(HttpPostedFileBase Image, Product product)
         {
-            ProductDao dao = new ProductDao();
-            var product = dao.ViewDetail(id);
-            var images = product.MoreImages;
-            XElement xImages = XElement.Parse(images);
-            List<string> listImagesReturn = new List<string>();
+            if (ModelState.IsValid)
+            {
+                var dao = new ProductDao();
+                if (dao.CountProductName(product.Name) > 0)
+                {
+                    ModelState.AddModelError("", "Sản phẩm này đã có !");
+                }
+                else
+                {
+                    try
+                    {
 
-            foreach (XElement element in xImages.Elements())
-            {
-                listImagesReturn.Add(element.Value);
+                        if (Image != null)
+                        {
+                            //Lấy đuôi file để kiểm tra chỉ lấy hình ảnh
+                            string extension = Path.GetExtension(Image.FileName);
+                            //, Path.GetFileName(Image.FileName)
+                            string path = Path.Combine(Server.MapPath("~/Data/Image/Product/"));
+                            string strExtexsion = Path.GetExtension(Path.GetFileName(Image.FileName)).Trim();
+                            product.CreatedDate = DateTime.Now;
+                            product.Status = true;
+                            //Kiểm tra đuôi file ảnh
+                            if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
+                            {
+                                if (Image.ContentLength <= 500000)// kiểm tra kích thước file nhỏ hơn hoặc bằng 1mb
+                                {
+                                    long id = dao.Insert(product);
+                                    product.Image = "/Data/Image/Product/" + product.ID + strExtexsion;
+                                    dao.UpdateImage(product);
+                                    if (id > 0)
+                                    {
+                                        Image.SaveAs(path + product.ID + strExtexsion);
+                                        ModelState.Clear();
+
+                                        return RedirectToAction("Index", "Product");
+                                    }
+                                    else
+                                    {
+                                        ModelState.AddModelError("", "Thêm tin tức không thành công");
+                                    }
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError("", "Kích thước file phải nhỏ hơn hoặc bằng 5mb");
+                                }
+
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", "Bạn phải chọn hình ảnh, các đuôi .jpg/.jpeg/.png");
+                            }
+
+
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+
+                        ViewBag.FileStatus = "Error while file uploading.";
+                    }
+                }
             }
-            return Json(new
-            {
-                data = listImagesReturn
-            }, JsonRequestBehavior.AllowGet);
+            SetViewBag();
+            return View("Create");
         }
-        public JsonResult SaveImages(long id, string images)
+
+        [HttpGet]
+        public ActionResult Edit(long? id)
         {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            var listImages = serializer.Deserialize<List<string>>(images);
-
-            XElement xElement = new XElement("Images");
-
-            foreach (var item in listImages)
+            if (id == null)
             {
-                var subStringItem = item.Substring(21);
-                xElement.Add(new XElement("Image", subStringItem));
+                return RedirectToAction("Index", "Product", new { area = "Admin" });
             }
-            ProductDao dao = new ProductDao();
-            try
-            {
-                dao.UpdateImages(id, xElement.ToString());
-                return Json(new
-                {
-                    status = true
-                });
-            }
-            catch (Exception ex)
-            {
-                return Json(new
-                {
-                    status = false
-                });
-            }
+            var dao = new ProductDao();
+            var product = dao.GetByID(id);
 
+            Session["imgPath"] = product.Image;
+            SetViewBag(product.CategoryID);
+
+            return View(product);
         }
+
+        [HttpPost]
+        [ValidateInput(false)]
+
+        public ActionResult Edit(HttpPostedFileBase Image, Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new ProductDao();
+
+                try
+                {
+
+                    if (Image != null)
+                    {
+                        //Lấy đuôi file để kiểm tra chỉ lấy hình ảnh
+                        string extension = Path.GetExtension(Image.FileName);
+                        //, Path.GetFileName(Image.FileName)
+                        string path = Path.Combine(Server.MapPath("~/Data/Image/Product/"));
+                        string strExtexsion = Path.GetExtension(Path.GetFileName(Image.FileName)).Trim();
+                        product.CreatedDate = DateTime.Now;
+                        //Kiểm tra đuôi file ảnh
+                        if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
+                        {
+                            if (Image.ContentLength <= 500000)// kiểm tra kích thước file nhỏ hơn hoặc bằng 1mb
+                            {
+                                string oldImagePath = Request.MapPath(Session["imgPath"].ToString());
+                                var result = dao.Update(product);
+                                product.Image = "/Data/Image/Product/" + product.ID + strExtexsion;
+                                dao.UpdateImage(product);
+                                if (result)
+                                {
+                                    if (System.IO.File.Exists(oldImagePath))
+                                    {
+                                        System.IO.File.Delete(oldImagePath);
+                                    }
+                                    Image.SaveAs(path + product.ID + strExtexsion);
+
+                                    ModelState.Clear();
+
+                                    return RedirectToAction("Index", "Product");
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError("", "Thêm tin tức không thành công");
+                                }
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", "Kích thước file phải nhỏ hơn hoặc bằng 5mb");
+                            }
+
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Bạn phải chọn hình ảnh, các đuôi .jpg/.jpeg/.png");
+                        }
+
+
+                    }
+                    else
+                    {
+                        product.Image = Session["imgPath"].ToString();
+                        var result = dao.Update(product);
+                        return RedirectToAction("Index", "Product");
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    ViewBag.FileStatus = "Error while file uploading.";
+                }
+
+            }
+            SetViewBag();
+            return View("Edit");
+        }
+
+        //xóa sản phẩm
+        [HttpDelete]
+        public ActionResult Delete(int id, Product product)
+        {
+            new ProductDao().Detele(id);
+
+            string currentImg = Request.MapPath(product.Image);
+            if (System.IO.File.Exists(currentImg))
+            {
+                System.IO.File.Delete(currentImg);
+            }
+            return RedirectToAction("Index", "Product");
+        }
+
         public void SetViewBag(long? selectedId = null)
         {
             var dao = new ProductCategoryDao();
             ViewBag.CategoryID = new SelectList(dao.ListAll(), "ID", "Name", selectedId);
+        }
+
+        //change status
+
+        [HttpPost]
+        public JsonResult ChangeStatus(long id)
+        {
+            var result = new ProductDao().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
         }
     }
 }
