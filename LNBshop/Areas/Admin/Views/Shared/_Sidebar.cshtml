@@ -34,9 +34,6 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Nhóm tài khoản:</h6>
-                @Html.ActionLink("Danh sách", "Index", "GroupUser", null, new { @class = "collapse-item" })
-                <hr />
                 <h6 class="collapse-header">Tài khoản:</h6>
                 @Html.ActionLink("Danh sách", "Index", "User", null, new { @class = "collapse-item" })
                 @Html.ActionLink("Thêm tài khoản", "Create", "User", null, new { @class = "collapse-item" })
@@ -53,8 +50,8 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Danh mục:</h6>
-                @Html.ActionLink("Danh sách", "Index", "Category", null, new { @class = "collapse-item" })
-                @Html.ActionLink("Thêm danh mục mới", "Create", "Category", null, new { @class = "collapse-item" })
+                @Html.ActionLink("Danh sách", "Index", "ContentCategory", null, new { @class = "collapse-item" })
+                @Html.ActionLink("Thêm danh mục mới", "Create", "ContentCategory", null, new { @class = "collapse-item" })
                 <hr />
                 <h6 class="collapse-header">Tin tức:</h6>
                 @Html.ActionLink("Danh sách", "Index", "Content", null, new { @class = "collapse-item" })

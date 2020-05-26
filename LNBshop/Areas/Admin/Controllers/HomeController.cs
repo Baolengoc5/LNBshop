@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LNBshop.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,7 @@ namespace LNBshop.Areas.Admin.Controllers
     //Và vì BaseController cũng kế thừa từ Controller nên điều này hợp lệ
     public class HomeController : BaseController
     {
+        
         // GET: Admin/Home
         public ActionResult Index()
         {
