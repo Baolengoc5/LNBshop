@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.DAO.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace LNBshop.Controllers
 {
     public class HomeController : Controller
     {
+        
         public ActionResult Index()
         {
             return View();
@@ -25,6 +27,13 @@ namespace LNBshop.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        [ChildActionOnly]
+        public ActionResult StartHeader()
+        {
+            var model = new MenuDao().ListbygroupID(1);
+            return PartialView(model);
         }
     }
 }
