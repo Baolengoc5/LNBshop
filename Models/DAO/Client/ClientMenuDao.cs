@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace Models.DAO.Client
 {
-    public class MenuDao
+    public class ClientMenuDao
     {
         LNBshopDbContext db = null;// khai báo biến
-        public MenuDao()//tạo một constructor để tạo mới db
+        public ClientMenuDao()//tạo một constructor để tạo mới db
         {
             db = new LNBshopDbContext();
         }
 
         public List<Menu> ListbygroupID(int groupId)
         {
-            return db.Menus.Where(x => x.TypeID == groupId).ToList();
+            return db.Menus.Where(x => x.TypeID == groupId && x.Status == true).ToList();
         }
     }
 }

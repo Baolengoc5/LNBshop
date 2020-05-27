@@ -44,20 +44,8 @@
                             <ul class="aa-head-top-nav-right">
                                 @foreach (var item in Model)
                                 {
-                                    <li class="hidden-xs"><a href="@item.Link" target="@item.Target">@item.Text</a></li>
+                                    <li><a href="@item.Link" target="@item.Target">@item.Text</a></li>
                                 }
-                                <li>
-                                    <div class="dropdown">
-                                        <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu2" data-toggle="dropdown">
-                                            Tài khoản
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="/Admin/Login/">Đăng nhập</a></li>
-                                            <li><a href="/Admin/Register/">Đăng ký</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                     </div>
