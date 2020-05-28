@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -59,7 +60,20 @@ namespace LNBshop.Areas.Admin.Controllers
 
                 try
                 {
-
+                    string stFormD = content.Name.Normalize(NormalizationForm.FormD);
+                    StringBuilder sb = new StringBuilder();
+                    for (int ich = 0; ich < stFormD.Length; ich++)
+                    {
+                        System.Globalization.UnicodeCategory uc = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(stFormD[ich]);
+                        if (uc != System.Globalization.UnicodeCategory.NonSpacingMark)
+                        {
+                            sb.Append(stFormD[ich]);
+                        }
+                    }
+                    sb = sb.Replace('Đ', 'D');
+                    sb = sb.Replace('đ', 'd');
+                    sb = sb.Replace(' ', '-');
+                    content.MetaTitle = sb.ToString().Normalize(NormalizationForm.FormD);
                     if (Image != null)
                     {
                         //Lấy đuôi file để kiểm tra chỉ lấy hình ảnh
@@ -155,7 +169,20 @@ namespace LNBshop.Areas.Admin.Controllers
                 {
                     try
                     {
-
+                        string stFormD = content.Name.Normalize(NormalizationForm.FormD);
+                        StringBuilder sb = new StringBuilder();
+                        for (int ich = 0; ich < stFormD.Length; ich++)
+                        {
+                            System.Globalization.UnicodeCategory uc = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(stFormD[ich]);
+                            if (uc != System.Globalization.UnicodeCategory.NonSpacingMark)
+                            {
+                                sb.Append(stFormD[ich]);
+                            }
+                        }
+                        sb = sb.Replace('Đ', 'D');
+                        sb = sb.Replace('đ', 'd');
+                        sb = sb.Replace(' ', '-');
+                        content.MetaTitle = sb.ToString().Normalize(NormalizationForm.FormD);
                         if (Image != null)
                         {
                             //Lấy đuôi file để kiểm tra chỉ lấy hình ảnh

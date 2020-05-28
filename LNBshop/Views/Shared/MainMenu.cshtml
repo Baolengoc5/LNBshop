@@ -1,19 +1,25 @@
 ﻿@model List<Models.EF.Menu>
 
-<!-- MainMenu -->
-<div class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle text-white" data-toggle="collapse" data-target="#navbar-collapse1">
-            <b>Chuyển trang</b>
-        </button>
+    <div class="aa-header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="aa-header-top-area">
+                        <!-- start header top left -->
+                        <div class="aa-header-top-right">
+                            <ul class="aa-head-top-nav-right">
+                                @foreach (var item in Model)
+                                {
+                                    <li><a href="@item.Link" target="@item.Target">@item.Text</a></li>
+                                }
+
+                            </ul>
+                        </div>
+                        <!-- / header top left -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="navbar-collapse collapse" id="navbar-collapse1">
-        <!-- Left nav -->
-        <ul class="nav navbar-nav">
-            @foreach (var item in Model)
-            {
-                <li><a href="@item.Link" target="@item.Target">@item.Text</a></li>
-            }
-        </ul>
-    </div><!--/.nav-collapse -->
-</div>
+            
