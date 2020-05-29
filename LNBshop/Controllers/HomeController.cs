@@ -13,6 +13,10 @@ namespace LNBshop.Controllers
         public ActionResult Index()
         {
             ViewBag.Slides = new SlideDao().ListAll();
+            ViewBag.NewContent = new ContentDao().ListNewContent(3);
+            var producDao = new ProductDao();
+            ViewBag.NewProduct = producDao.ListNewProduct(8);
+            ViewBag.HotProduct = producDao.ListHotProduct(6);
             return View();
         }
 

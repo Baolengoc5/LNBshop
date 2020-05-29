@@ -60,7 +60,7 @@ namespace LNBshop.Areas.Admin.Controllers
                         }
                         sb = sb.Replace('Đ', 'D');
                         sb = sb.Replace('đ', 'd');
-                        sb = sb.Replace(' ','-');
+                        sb = sb.Replace(' ', '-');
                         product.MetaTitle = sb.ToString().Normalize(NormalizationForm.FormD);
 
                         if (Image != null)
@@ -127,8 +127,15 @@ namespace LNBshop.Areas.Admin.Controllers
             }
             var dao = new ProductDao();
             var product = dao.GetByID(id);
+            if (product.TopHot != null)
+            {
+                Session["topHot"] = product.TopHot;
+            }
+            else
+            {
+                Session["topHot"] = "Chưa lên top hot";
+            }
 
-            Session["topHot"] = product.TopHot;
             Session["imgPath"] = product.Image;
             SetViewBag(product.CategoryID);
 

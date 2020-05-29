@@ -111,7 +111,7 @@
                         <!-- search box -->
                         <div class="aa-search-box">
                             <form action="">
-                                <input type="text" name="" id="" placeholder="Search here ex. 'man' ">
+                                <input type="text" name="" id="" placeholder="Tìm kiếm ">
                                 <button type="submit"><span class="fa fa-search"></span></button>
                             </form>
                         </div>
@@ -149,6 +149,7 @@
                     <div class="navbar-collapse collapse" id="navbar-collapse">
                         <!-- Left nav -->
                         <ul class="nav navbar-nav">
+                            <li><a><b>Danh mục :</b></a></li>
                             @{ Html.RenderAction("MenuCategory", "Home"); }
                             @{ Html.RenderAction("MenuCategoryHiden", "Home"); }
                         </ul>
@@ -161,24 +162,6 @@
 
     <!-- / category -->
     @RenderBody()
-    <!-- Subscribe section -->
-    <section id="aa-subscribe">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="aa-subscribe-area">
-                        <h3>Subscribe our newsletter </h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, velit!</p>
-                        <form action="" class="aa-subscribe-form">
-                            <input type="email" name="" id="" placeholder="Enter your Email">
-                            <input type="submit" value="Subscribe">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- / Subscribe section -->
     <!-- footer -->
     <footer id="aa-footer">
         <!-- footer bottom -->
