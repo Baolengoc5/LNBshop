@@ -128,6 +128,7 @@ namespace LNBshop.Areas.Admin.Controllers
             var dao = new ProductDao();
             var product = dao.GetByID(id);
 
+            Session["topHot"] = product.TopHot;
             Session["imgPath"] = product.Image;
             SetViewBag(product.CategoryID);
 
@@ -137,7 +138,7 @@ namespace LNBshop.Areas.Admin.Controllers
         [HttpPost]
         [ValidateInput(false)]
 
-        public ActionResult Edit(HttpPostedFileBase Image, Product product)
+        public ActionResult Edit(HttpPostedFileBase Image, Product product, DateTime TopHot)
         {
             if (ModelState.IsValid)
             {
@@ -159,6 +160,10 @@ namespace LNBshop.Areas.Admin.Controllers
                     sb = sb.Replace('đ', 'd');
                     sb = sb.Replace(' ', '-');
                     product.MetaTitle = sb.ToString().Normalize(NormalizationForm.FormD);
+                    if (TopHot != null)
+                    {
+                        product.TopHot = TopHot;
+                    }
                     if (Image != null)
                     {
                         //Lấy đuôi file để kiểm tra chỉ lấy hình ảnh

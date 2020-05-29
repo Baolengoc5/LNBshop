@@ -63,6 +63,7 @@
     <Compile Include="DAO\CategoryDao.cs" />
     <Compile Include="DAO\Client\ClientCategoryDao.cs" />
     <Compile Include="DAO\Client\ClientMenuDao.cs" />
+    <Compile Include="DAO\Client\SlideDao.cs" />
     <Compile Include="DAO\ContentDao.cs" />
     <Compile Include="DAO\ProductCategoryDao.cs" />
     <Compile Include="DAO\ProductDao.cs" />

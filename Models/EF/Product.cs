@@ -62,6 +62,8 @@ namespace Models.EF
 
         public bool Status { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? TopHot { get; set; }
 
         public int? ViewCount { get; set; }

@@ -12,6 +12,7 @@ namespace LNBshop.Controllers
         
         public ActionResult Index()
         {
+            ViewBag.Slides = new SlideDao().ListAll();
             return View();
         }
 
@@ -46,7 +47,14 @@ namespace LNBshop.Controllers
         [ChildActionOnly]
         public ActionResult MenuCategory()
         {
-            var model = new ClientCategoryDao().ListbygroupID();
+            var model = new ClientCategoryDao().ListbygroupID(true);
+            return PartialView(model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult MenuCategoryHiden()
+        {
+            var model = new ClientCategoryDao().ListbygroupID(false);
             return PartialView(model);
         }
     }

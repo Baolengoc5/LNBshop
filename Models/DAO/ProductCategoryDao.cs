@@ -91,7 +91,7 @@ namespace Models.DAO
             return db.ProductCategories.Where(x => x.Status == true).OrderBy(x => x.DisplayOrder).ToList();
         }
 
-        public ProductCategory ViewDetail(long id)
+        public ProductCategory ViewDetail(long? id)
         {
             return db.ProductCategories.Find(id);
         }

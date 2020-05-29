@@ -130,7 +130,7 @@ namespace Models.DAO
             return db.Users.Count(x => x.UserName == userName);
         }
 
-        public User ViewDetail(int id)//Hàm này để tìm kiếm một bản ghi dựa trên khóa chính
+        public User ViewDetail(int? id)//Hàm này để tìm kiếm một bản ghi dựa trên khóa chính
         {
             return db.Users.Find(id);
             //Cách này cũng giống với hàm GetByUserName ở trên

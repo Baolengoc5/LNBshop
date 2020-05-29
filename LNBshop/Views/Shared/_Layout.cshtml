@@ -137,8 +137,23 @@
         <div class="container">
             <div class="menu-area">
                 <!-- MenuCategory -->
-
-                @{ Html.RenderAction("MenuCategory", "Home"); }
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle text-white" data-toggle="collapse" data-target="#navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse" id="navbar-collapse">
+                        <!-- Left nav -->
+                        <ul class="nav navbar-nav">
+                            @{ Html.RenderAction("MenuCategory", "Home"); }
+                            @{ Html.RenderAction("MenuCategoryHiden", "Home"); }
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
             </div>
         </div>
     </section>

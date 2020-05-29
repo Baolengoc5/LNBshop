@@ -72,8 +72,12 @@ namespace LNBshop.Areas.Admin.Controllers
             return View("Create");
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("Index", "ContentCategory", new { area = "Admin" });
+            }
             var category = new CategoryDao().ViewDetail(id);
             return View(category);
         }
@@ -81,6 +85,7 @@ namespace LNBshop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(Category category)
         {
+
             if (ModelState.IsValid)
             {
                 var dao = new CategoryDao();

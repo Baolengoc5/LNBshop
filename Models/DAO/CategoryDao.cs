@@ -88,7 +88,7 @@ namespace Models.DAO
             }
         }
 
-        public Category ViewDetail(long id)
+        public Category ViewDetail(long? id)
         {
             return db.Categories.Find(id);
         }

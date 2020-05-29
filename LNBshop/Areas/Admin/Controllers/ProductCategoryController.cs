@@ -72,8 +72,12 @@ namespace LNBshop.Areas.Admin.Controllers
             return View("Create");
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("Index", "ProductCategory", new { area = "Admin" });
+            }
             var productCategory = new ProductCategoryDao().ViewDetail(id);
             return View(productCategory);
         }

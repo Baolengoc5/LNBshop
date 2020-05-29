@@ -1,18 +1,7 @@
 ﻿@model List<Models.EF.ProductCategory>
 
-<div class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle text-white" data-toggle="collapse" data-target="#navbar-collapse">
-            <b>Danh mục</b>
-        </button>
-    </div>
-    <div class="navbar-collapse collapse" id="navbar-collapse">
-        <!-- Left nav -->
-        <ul class="nav navbar-nav">
             @foreach (var item in Model)
             {
-                <li><a href="#">@item.Name</a></li>
+                <li><a href="/product/@item.MetaTitle-@item.ID">@item.Name</a></li>
             }
-        </ul>
-    </div><!--/.nav-collapse -->
-</div>
+        @*Đây là phần đầu của menu danh mục sản phẩm*@

@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace Models.DAO.Client
 {
-    public class ClientCategoryDao
+    public class SlideDao
     {
         LNBshopDbContext db = null;// khai báo biến
-        public ClientCategoryDao()//tạo một constructor để tạo mới db
+        public SlideDao()//tạo một constructor để tạo mới db
         {
             db = new LNBshopDbContext();
         }
 
-        public List<ProductCategory> ListbygroupID(bool showOnHome)
+        public List<Slide> ListAll()
         {
-            return db.ProductCategories.Where(x =>x.Status == true && x.ShowOnHome == showOnHome).ToList();
+            return db.Slides.Where(x => x.Status == true).OrderBy(x=>x.DisplayOrder).ToList();
         }
     }
 }

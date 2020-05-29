@@ -38,6 +38,10 @@ namespace Models.DAO
                 {
                     product.PromotionPrice = entity.PromotionPrice;
                 }
+                if (entity.TopHot != null)
+                {
+                    product.TopHot = entity.TopHot;
+                }
 
                 product.Name = entity.Name;
                 product.MetaTitle = entity.MetaTitle;

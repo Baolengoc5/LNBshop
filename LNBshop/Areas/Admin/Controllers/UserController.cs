@@ -28,8 +28,12 @@ namespace LNBshop.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("Index", "User", new { area = "Admin" });
+            }
             var user = new UserDao().ViewDetail(id);
             return View(user);
         }
@@ -69,6 +73,7 @@ namespace LNBshop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(User user)
         {
+            
             if (ModelState.IsValid)
             {
                 var dao = new UserDao();
