@@ -133,7 +133,7 @@ namespace LNBshop.Areas.Admin.Controllers
             }
             else
             {
-                Session["topHot"] = "Chưa lên top hot";
+                Session["topHot"] = "Chưa đặt top hot";
             }
 
             Session["imgPath"] = product.Image;
@@ -145,7 +145,7 @@ namespace LNBshop.Areas.Admin.Controllers
         [HttpPost]
         [ValidateInput(false)]
 
-        public ActionResult Edit(HttpPostedFileBase Image, Product product, DateTime TopHot)
+        public ActionResult Edit(HttpPostedFileBase Image, Product product, DateTime? TopHot)
         {
             if (ModelState.IsValid)
             {
@@ -171,6 +171,7 @@ namespace LNBshop.Areas.Admin.Controllers
                     {
                         product.TopHot = TopHot;
                     }
+
                     if (Image != null)
                     {
                         //Lấy đuôi file để kiểm tra chỉ lấy hình ảnh

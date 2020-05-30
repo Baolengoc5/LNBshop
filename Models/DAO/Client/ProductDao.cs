@@ -25,5 +25,10 @@ namespace Models.DAO.Client
         {
             return db.Products.Where(x=>x.TopHot != null && x.TopHot > DateTime.Now).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
         }
+
+        public List<Product> ListProductCategory(long CatID)
+        {
+            return db.Products.Where(x => x.Status == true && x.CategoryID == CatID).OrderByDescending(x => x.CreatedDate).ToList();
+        }
     }
 }

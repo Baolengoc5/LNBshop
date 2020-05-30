@@ -76,7 +76,7 @@
             <div class="col-md-10">
                 @* Phần input sử dụng CKeditor *@
                 <label>@Url.Content(Session["topHot"].ToString())</label>
-                <input type="date" id="TopHot" name="TopHot"/>
+                <input type="date" id="TopHot" name="TopHot" value="@Session["topHot"]"/>
                 @Html.ValidationMessageFor(model => model.TopHot, "", new { @class = "text-danger" })
             </div>
         </div>

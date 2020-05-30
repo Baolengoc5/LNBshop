@@ -14,11 +14,52 @@ namespace LNBshop
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Home",
+                url: "trang-chu",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+            routes.MapRoute(
+                name: "Product Category",
+                url: "san-pham/{metatitle}-{catId}",
+                defaults: new { controller = "Product", action = "productCategory", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "About",
+                url: "gioi-thieu",
+                defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+            routes.MapRoute(
+                name: "Content",
+                url: "tin-tuc",
+                defaults: new { controller = "Content", action = "AllContent", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Product",
+                url: "san-pham",
+                defaults: new { controller = "Product", action = "AllProduct", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Contact",
+                url: "lien-he",
+                defaults: new { controller = "Home", action = "Contact", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+
+            //Các MapRoute khác phải đặt trước Maproute Default
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 new[] { "LNBshop.Controllers" }//sửa lỗi trùng tên Controller
-            ) ;
+            );
         }
     }
 }
