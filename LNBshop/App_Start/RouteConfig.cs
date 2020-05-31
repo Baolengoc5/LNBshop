@@ -19,10 +19,18 @@ namespace LNBshop
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 new[] { "LNBshop.Controllers" }
             );
+
             routes.MapRoute(
                 name: "Product Category",
                 url: "san-pham/{metatitle}-{catId}",
                 defaults: new { controller = "Product", action = "productCategory", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Product Detail",
+                url: "chi-tiet/{metatitle}-{productId}",
+                defaults: new { controller = "Product", action = "productDetail", id = UrlParameter.Optional },
                 new[] { "LNBshop.Controllers" }
             );
 

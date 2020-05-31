@@ -1,4 +1,5 @@
 ﻿using Models.DAO.Client;
+using Models.EF;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
@@ -34,6 +35,15 @@ namespace LNBshop.Controllers
         {
             var productCategory = new ProductDao().ListProductCategory(catId);
             return View(productCategory);
+        }
+
+        public ActionResult productDetail(long productId)
+        {
+            var product = new ProductDao().ViewDetail(productId);
+            ViewBag.Category = new ClientCategoryDao().ViewDetail(product.CategoryID.Value);
+            var producDao = new ProductDao();
+            ViewBag.RelatedProduct = producDao.ListRelatedProduct(product.CategoryID.Value,8);
+            return View(product);
         }
     }
 }

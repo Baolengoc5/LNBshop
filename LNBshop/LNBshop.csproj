@@ -2476,6 +2476,7 @@
     <Content Include="Views\Shared\MainMenu.cshtml" />
     <Content Include="Views\Shared\MenuCategoryHiden.cshtml" />
     <Content Include="Views\Product\productCategory.cshtml" />
+    <Content Include="Views\Product\productDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2483,6 +2484,7 @@
     <Folder Include="Data\Image\Content\" />
     <Folder Include="Data\Image\Language\" />
     <Folder Include="Data\Image\Slide\" />
+    <Folder Include="Data\Image\Source\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

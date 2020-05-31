@@ -19,5 +19,10 @@ namespace Models.DAO.Client
         {
             return db.ProductCategories.Where(x =>x.Status == true && x.ShowOnHome == showOnHome).ToList();
         }
+
+        public ProductCategory ViewDetail(long id)
+        {
+            return db.ProductCategories.Find(id);
+        }
     }
 }
