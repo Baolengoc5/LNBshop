@@ -62,10 +62,10 @@
                                             <li>
                                                 <figure>
                                                     <a class="aa-product-img" href="@url"><img src="@item.Image" width="250" height="300" alt="@item.Name"></a>
-                                                    <a class="aa-add-card-btn" href="@url"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                                                    <a class="aa-add-card-btn" href="/gio-hang/@item.ID"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
                                                     <figcaption>
                                                         <h4 class="aa-product-title"><a href="@url">@item.Name</a></h4>
-                                                        <span class="aa-product-price">@(item.Price.HasValue? item.Price.Value.ToString("N0"):"Liên hệ")</span><sup>đ</sup><span class="aa-product-price"><del>$65.50</del></span>
+                                                        <span class="aa-product-price">@(item.PromotionPrice.HasValue? item.PromotionPrice.Value.ToString("N0"):item.Price.Value.ToString("N0"))<sup>đ</sup></span><span class="aa-product-price"><del>@(item.PromotionPrice.HasValue? "("+item.Price.Value.ToString("N0")+")":"")</del>)</span>
                                                     </figcaption>
                                                 </figure>
                                                 <div class="aa-product-hvr-content">
@@ -82,7 +82,7 @@
                                             </li>
                                         }
                                     </ul>
-                                    <a class="aa-browse-btn" href="/san-pham">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
+                                    <a class="aa-browse-btn" href="/san-pham">Xem thêm <span class="fa fa-long-arrow-right"></span></a>
                                 </div>
                                 <!-- / new product category -->
                             </div>
@@ -157,7 +157,7 @@
                                                             </p>
                                                         </div>
                                                         <div class="aa-prod-view-bottom">
-                                                            <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                                                            <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
                                                             <a href="#" class="aa-add-to-cart-btn">View Details</a>
                                                         </div>
                                                     </div>
@@ -196,10 +196,10 @@
                                         <li>
                                             <figure>
                                                 <a class="aa-product-img" href="@url"><img src="@item.Image" width="250" height="300" alt="@item.Name"></a>
-                                                <a class="aa-add-card-btn" href="@url"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                                                <a class="aa-add-card-btn" href="/gio-hang/@item.ID"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
                                                 <figcaption>
                                                     <h4 class="aa-product-title"><a href="@url">@item.Name</a></h4>
-                                                    <span class="aa-product-price">@(item.Price.HasValue? item.Price.Value.ToString("N0"):"Liên hệ")</span><sup>đ</sup><span class="aa-product-price"><del>$65.50</del></span>
+                                                    <span class="aa-product-price">@(item.PromotionPrice.HasValue? item.PromotionPrice.Value.ToString("N0"):item.Price.Value.ToString("N0"))<sup>đ</sup></span><span class="aa-product-price"><del>@(item.PromotionPrice.HasValue? "("+item.Price.Value.ToString("N0")+")":"")</del>)</span>
                                                 </figcaption>
                                             </figure>
                                             <div class="aa-product-hvr-content">
@@ -216,7 +216,7 @@
                                         </li>
                                     }
                                 </ul>
-                                <a class="aa-browse-btn" href="/san-pham">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
+                                <a class="aa-browse-btn" href="/san-pham">Xem thêm <span class="fa fa-long-arrow-right"></span></a>
                             </div>
                             <!-- / latest product category -->
                         </div>

@@ -6,6 +6,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace LNBshop.Controllers
 {
@@ -24,9 +25,28 @@ namespace LNBshop.Controllers
             return PartialView(model);
         }
 
-        public ActionResult productCategory(long catId)
+        public ActionResult productCategory(long catId, int page = 1, int pageSize = 8)
         {
-            var productCategory = new ProductDao().ListProductCategory(catId);
+            var category = new ClientCategoryDao().ViewDetail(catId);
+            ViewBag.Category = category;
+            int totalRecord = 0;
+            var productCategory = new ProductDao().ListProductCategory(catId,ref totalRecord, page, pageSize);
+
+            ViewBag.Total = totalRecord;
+            ViewBag.Page = page;
+
+            int maxPage = 5;
+            int totalPage = 0;
+
+            totalPage = (int)Math.Ceiling((double)(totalRecord/pageSize));
+            ViewBag.totalPage = totalPage;
+
+            ViewBag.maxPage = maxPage;
+            ViewBag.first = 1;
+            ViewBag.last = totalPage;
+            ViewBag.next = page + 1;
+            ViewBag.prev = page - 1;
+            
             return View(productCategory);
         }
 

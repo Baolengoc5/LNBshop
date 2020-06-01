@@ -18,17 +18,19 @@ namespace Models.DAO.Client
 
         public List<Product> ListNewProduct(int top)
         {
-            return db.Products.OrderByDescending(x => x.CreatedDate).Take(top).ToList();
+            return db.Products.Where(x => x.Status == true).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
         }
 
         public List<Product> ListHotProduct(int top)
         {
-            return db.Products.Where(x=>x.TopHot != null && x.TopHot > DateTime.Now).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
+            return db.Products.Where( x=>x.Status == true && x.TopHot != null && x.TopHot > DateTime.Now).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
         }
 
-        public List<Product> ListProductCategory(long CatID)
+        public List<Product> ListProductCategory(long CatID,ref int totalRecord, int pageIndex = 1, int pageSize = 8)
         {
-            return db.Products.Where(x => x.Status == true && x.CategoryID == CatID).OrderByDescending(x => x.CreatedDate).ToList();
+            totalRecord = db.Products.Where(x => x.Status == true && x.CategoryID == CatID).Count();
+            var model = db.Products.Where(x => x.Status == true && x.CategoryID == CatID).OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            return model;
         }
 
         public Product ViewDetail(long id)

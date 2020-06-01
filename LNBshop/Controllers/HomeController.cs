@@ -16,7 +16,7 @@ namespace LNBshop.Controllers
             ViewBag.NewContent = new ContentDao().ListNewContent(3);
             var producDao = new ProductDao();
             ViewBag.NewProduct = producDao.ListNewProduct(8);
-            ViewBag.HotProduct = producDao.ListHotProduct(6);
+            ViewBag.HotProduct = producDao.ListHotProduct(8);
             return View();
         }
 
