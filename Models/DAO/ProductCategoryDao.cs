@@ -51,8 +51,14 @@ namespace Models.DAO
             {
                 var productCategory = db.ProductCategories.Find(entity.ID);//tìm ID
 
+                if (entity.ParentID != null)
+                {
+                    productCategory.ParentID = entity.ParentID;
+                }
+
                 productCategory.Name = entity.Name;
                 productCategory.MetaTitle = entity.MetaTitle;
+                productCategory.SeoTitle = entity.SeoTitle;
                 productCategory.MetaKeywords = entity.MetaKeywords;
                 productCategory.MetaDescriptions = entity.MetaDescriptions;
                 productCategory.ShowOnHome = entity.ShowOnHome;

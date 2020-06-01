@@ -24,13 +24,6 @@ namespace LNBshop.Controllers
             return PartialView(model);
         }
 
-        [ChildActionOnly]
-        public ActionResult MenuCategoryHiden()
-        {
-            var model = new ClientCategoryDao().ListbygroupID(false);
-            return PartialView(model);
-        }
-
         public ActionResult productCategory(long catId)
         {
             var productCategory = new ProductDao().ListProductCategory(catId);

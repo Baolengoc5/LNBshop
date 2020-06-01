@@ -1,7 +1,36 @@
 ﻿@model List<Models.EF.ProductCategory>
-
-            @foreach (var item in Model)
+<div class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle text-white" data-toggle="collapse" data-target="#navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+        <!-- Left nav -->
+        <ul class="nav navbar-nav">
+            <li><a><b>Danh mục :</b></a></li>
+            @foreach (var item in Model.Where(x => x.ParentID == null))
             {
-                <li><a href="/san-pham/@item.MetaTitle-@item.ID">@item.Name</a></li>
+                var child = Model.Where(x => x.ParentID == item.ID);
+                var parentLink = child.Count() > 0 ? "#" : "/san-pham/" + @item.MetaTitle + "-" + @item.ID;
+                var parentspan = child.Count() > 0 ? "<span class='caret'></span>" : "";
+
+                <li>
+                    <a href="@parentLink">@item.Name @Html.Raw(@parentspan)</a>
+                    @if (child.Count() > 0)
+                    {
+                        <ul class="dropdown-menu">
+                            @foreach (var childItem in child)
+                            {
+                                <li><a href="/san-pham/@childItem.MetaTitle-@childItem.ID">@childItem.Name</a></li>
+                            }
+                        </ul>
+                    }
+                </li>
             }
-        @*Đây là phần đầu của menu danh mục sản phẩm*@
+        </ul>
+    </div><!--/.nav-collapse -->
+</div>

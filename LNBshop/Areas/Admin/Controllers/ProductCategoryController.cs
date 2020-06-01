@@ -24,6 +24,7 @@ namespace LNBshop.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            SetViewBag();
             return View();
         }
 
@@ -69,6 +70,7 @@ namespace LNBshop.Areas.Admin.Controllers
                 }
 
             }
+            SetViewBag();
             return View("Create");
         }
 
@@ -79,6 +81,7 @@ namespace LNBshop.Areas.Admin.Controllers
                 return RedirectToAction("Index", "ProductCategory", new { area = "Admin" });
             }
             var productCategory = new ProductCategoryDao().ViewDetail(id);
+            SetViewBag(productCategory.ParentID);
             return View(productCategory);
         }
 
@@ -133,6 +136,12 @@ namespace LNBshop.Areas.Admin.Controllers
         {
             new ProductCategoryDao().Detele(id);
             return RedirectToAction("Index");
+        }
+
+        public void SetViewBag(long? selectedId = null)
+        {
+            var dao = new ProductCategoryDao();
+            ViewBag.ParentID = new SelectList(dao.ListAll(), "ID", "Name", selectedId);
         }
     }
 }

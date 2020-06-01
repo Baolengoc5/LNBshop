@@ -17,7 +17,7 @@ namespace Models.DAO.Client
 
         public List<ProductCategory> ListbygroupID(bool showOnHome)
         {
-            return db.ProductCategories.Where(x =>x.Status == true && x.ShowOnHome == showOnHome).ToList();
+            return db.ProductCategories.Where(x =>x.Status == true).ToList();
         }
 
         public ProductCategory ViewDetail(long id)

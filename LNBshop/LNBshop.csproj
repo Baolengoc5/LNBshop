@@ -2474,7 +2474,6 @@
     <Content Include="Views\Shared\TopMenu.cshtml" />
     <Content Include="Views\Shared\MenuCategory.cshtml" />
     <Content Include="Views\Shared\MainMenu.cshtml" />
-    <Content Include="Views\Shared\MenuCategoryHiden.cshtml" />
     <Content Include="Views\Product\productCategory.cshtml" />
     <Content Include="Views\Product\productDetail.cshtml" />
   </ItemGroup>

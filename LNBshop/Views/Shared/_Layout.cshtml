@@ -137,24 +137,7 @@
         <div class="container">
             <div class="menu-area">
                 <!-- MenuCategory -->
-                <div class="navbar navbar-default" role="navigation">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle text-white" data-toggle="collapse" data-target="#navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <div class="navbar-collapse collapse" id="navbar-collapse">
-                        <!-- Left nav -->
-                        <ul class="nav navbar-nav">
-                            <li><a><b>Danh mục :</b></a></li>
-                            @{ Html.RenderAction("MenuCategory", "Product"); }
-                            @{ Html.RenderAction("MenuCategoryHiden", "Product"); }
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div>
+                @{ Html.RenderAction("MenuCategory", "Product"); }
             </div>
         </div>
     </section>
