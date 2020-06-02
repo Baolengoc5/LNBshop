@@ -6,22 +6,6 @@
     var category = (Models.EF.ProductCategory)ViewBag.Category;
     var relatedProduct = (List<Models.EF.Product>)ViewBag.RelatedProduct;
 }
-
-<body>
-    <!-- wpf loader Two -->
-    <div id="wpf-loader-two" style="display: none;">
-        <div class="wpf-loader-two-inner">
-            <span>Loading</span>
-        </div>
-    </div>
-    <!-- / wpf loader Two -->
-    <!-- SCROLL TOP BUTTON -->
-    <a class="scrollToTop" href="#" style="display: block;"><i class="fa fa-chevron-up"></i></a>
-    <!-- END SCROLL TOP BUTTON -->
-    <!-- Start header section -->
-    <!-- / header section -->
-    <!-- menu -->
-    <!-- / menu -->
     <!-- catg header banner section -->
     <section id="aa-catg-head-banner">
         <img src="~/Data/Image/Source/branch-store-1920x300.jpg" alt="branch-store img">
@@ -93,7 +77,7 @@
                                             </p>
                                         </div>
                                         <div class="aa-prod-view-bottom">
-                                            <a class="aa-add-to-cart-btn" href="/gio-hang/@Model.ID">Thêm vào giỏ</a>
+                                            <a class="aa-add-to-cart-btn" href="/them-gio-hang?productId=@Model.ID&quantity=1">Thêm vào giỏ</a>
                                         </div>
                                     </div>
                                 </div>
@@ -329,66 +313,3 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
-
-
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.js"></script>
-    <!-- SmartMenus jQuery plugin -->
-    <script type="text/javascript" src="js/jquery.smartmenus.js"></script>
-    <!-- SmartMenus jQuery Bootstrap Addon -->
-    <script type="text/javascript" src="js/jquery.smartmenus.bootstrap.js"></script>
-    <!-- To Slider JS -->
-    <script src="js/sequence.js"></script>
-    <script src="js/sequence-theme.modern-slide-in.js"></script>
-    <!-- Product view slider -->
-    <script type="text/javascript" src="js/jquery.simpleGallery.js"></script>
-    <script type="text/javascript" src="js/jquery.simpleLens.js"></script>
-    <!-- slick slider -->
-    <script type="text/javascript" src="js/slick.js"></script>
-    <!-- Price picker slider -->
-    <script type="text/javascript" src="js/nouislider.js"></script>
-    <!-- Custom js -->
-    <script src="js/custom.js"></script>
-
-    <!-- Code injected by live-server -->
-    <script type="text/javascript">
-        // <![CDATA[  <-- For SVG support
-        if ('WebSocket' in window) {
-            (function () {
-                function refreshCSS() {
-                    var sheets = [].slice.call(document.getElementsByTagName("link"));
-                    var head = document.getElementsByTagName("head")[0];
-                    for (var i = 0; i < sheets.length; ++i) {
-                        var elem = sheets[i];
-                        var parent = elem.parentElement || head;
-                        parent.removeChild(elem);
-                        var rel = elem.rel;
-                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-                        }
-                        parent.appendChild(elem);
-                    }
-                }
-                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-                var address = protocol + window.location.host + window.location.pathname + '/ws';
-                var socket = new WebSocket(address);
-                socket.onmessage = function (msg) {
-                    if (msg.data == 'reload') window.location.reload();
-                    else if (msg.data == 'refreshcss') refreshCSS();
-                };
-                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-                    console.log('Live reload enabled.');
-                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-                }
-            })();
-        }
-        else {
-            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-        }
-        // ]]>
-    </script>
-</body>

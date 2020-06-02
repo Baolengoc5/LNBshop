@@ -1,4 +1,6 @@
-﻿using Models.DAO.Client;
+﻿using LNBshop.Common;
+using LNBshop.Models;
+using Models.DAO.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +48,19 @@ namespace LNBshop.Controllers
         {
             var model = new ClientMenuDao().ListbygroupID(1);
             return PartialView(model);
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult HeaderCart()
+        {
+            var cart = Session[CommonConstants.CartSession];
+            var list = new List<CartItem>();
+            if (cart != null)
+            {
+                list = (List<CartItem>)cart;
+            }
+
+            return PartialView(list);
         }
     }
 }

@@ -148,11 +148,13 @@
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\UserLogin.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2104,6 +2106,7 @@
     <Content Include="Assets\Client\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\Client\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\Client\js\bootstrap.js" />
+    <Content Include="Assets\Client\js\Controller\cartController.js" />
     <Content Include="Assets\Client\js\custom.js" />
     <Content Include="Assets\Client\js\jquery.simpleGallery.js" />
     <Content Include="Assets\Client\js\jquery.simpleLens.js" />
@@ -2476,6 +2479,8 @@
     <Content Include="Views\Shared\MainMenu.cshtml" />
     <Content Include="Views\Product\productCategory.cshtml" />
     <Content Include="Views\Product\productDetail.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Shared\HeaderCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2484,7 +2489,6 @@
     <Folder Include="Data\Image\Language\" />
     <Folder Include="Data\Image\Slide\" />
     <Folder Include="Data\Image\Source\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

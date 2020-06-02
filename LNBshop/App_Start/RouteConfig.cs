@@ -55,6 +55,20 @@ namespace LNBshop
             );
 
             routes.MapRoute(
+                name: "Cart",
+                url: "gio-hang",
+                defaults: new { controller = "Cart", action = "Index", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Add Cart",
+                url: "them-gio-hang",
+                defaults: new { controller = "Cart", action = "AddItem", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Contact",
                 url: "lien-he",
                 defaults: new { controller = "Home", action = "Contact", id = UrlParameter.Optional },

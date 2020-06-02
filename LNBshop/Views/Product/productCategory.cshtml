@@ -54,7 +54,7 @@
                                 <li>
                                     <figure>
                                         <a class="aa-product-img" href="@url"><img src="@item.Image" width="250" height="300" alt="@item.Name"></a>
-                                        <a class="aa-add-card-btn" href="/gio-hang/@item.ID"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                        <a class="aa-add-card-btn" href="/them-gio-hang?productId=@item.ID&quantity=1"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
                                         <figcaption>
                                             <h4 class="aa-product-title"><a href="@url">@item.Name</a></h4>
                                             <span class="aa-product-price"><b>@(item.PromotionPrice.HasValue? item.PromotionPrice.Value.ToString("N0"):item.Price.Value.ToString("N0"))</b><sup>đ</sup></span><span class="aa-product-price"><del>@(item.PromotionPrice.HasValue? "("+item.Price.Value.ToString("N0")+")":"")</del></span>
