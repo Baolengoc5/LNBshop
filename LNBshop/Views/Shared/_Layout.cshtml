@@ -71,7 +71,7 @@
                         </div>
                         <!-- / logo  -->
                         <!-- cart box -->
-                        @{Html.RenderAction("HeaderCart", "Home");} 
+                        @{Html.RenderAction("HeaderCart", "Home");}
                         <!-- / cart box -->
                         <!-- search box -->
                         <div class="aa-search-box">
@@ -224,6 +224,6 @@
     <!-- Custom js -->
     <script src="~/Assets/Client/js/custom.js"></script>
 
-    @RenderSection("jsFooter",required:false)
+    <script src="/assets/client/js/controller/cartController.js"></script>
 </body>
 </html>

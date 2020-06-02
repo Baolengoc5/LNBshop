@@ -9,7 +9,6 @@
     <div class="aa-cartbox-summary">
         @if (Model.Count > 0)
         {
-
             <ul>
                 @foreach (var item in Model)
                 {
@@ -19,7 +18,6 @@
                             <h4><a href="#">@item.Product.Name</a></h4>
                             <p>@item.Quantity x @(item.Product.PromotionPrice.HasValue? item.Product.PromotionPrice.Value.ToString("N0"):item.Product.Price.Value.ToString("N0"))<sup>đ</sup></p>
                         </div>
-                        <a class="btn-delete" href="#"><span class="fa fa-times"></span></a>
                     </li>
                 }
 

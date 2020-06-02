@@ -4,10 +4,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section jsFooter{
-
-        <script src="/assets/client/js/controller/cartController.js"></script>
-    }
 
 <!-- Cart view section -->
 <section id="cart-view">
@@ -33,24 +29,26 @@
                                         </thead>
 
                                         <tbody>
+                                            @{
+                                                var Total = 0;
+                                            }
                                             @foreach (var item in Model)
                                             {
-                                            <tr>
-                                                <td><a href="#" data-id="@item.Product.ID" class="btn-delete"><fa class="fa fa-close"></fa></a></td>
-                                                <td><a href="/chi-tiet"><img src="@item.Product.Image" alt="img"></a></td>
-                                                <td><a class="aa-cart-title" href="#">@item.Product.Name</a></td>
-                                                <td>@(item.Product.PromotionPrice.HasValue? item.Product.PromotionPrice.Value.ToString("N0"):item.Product.Price.Value.ToString("N0"))<sup>đ</sup></td>
-                                                <td><input class="txtQuantity" type="number" data-id="@item.Product.ID" value="@item.Quantity"></td>
-                                                <td>@(((item.Product.PromotionPrice.HasValue ? item.Product.PromotionPrice.Value : item.Product.Price.Value) * item.Quantity).ToString("N0"))</td>
-                                            </tr>
+                                                <tr>
+                                                    <td><a href="#" data-id="@item.Product.ID" class="btn-delete"><fa class="fa fa-close"></fa></a></td>
+                                                    <td><a href="/chi-tiet"><img src="@item.Product.Image" alt="img"></a></td>
+                                                    <td><a class="aa-cart-title" href="#">@item.Product.Name</a></td>
+                                                    <td>@(item.Product.PromotionPrice.HasValue? item.Product.PromotionPrice.Value.ToString("N0"):item.Product.Price.Value.ToString("N0"))<sup>đ</sup></td>
+                                                    <td><input class="txtQuantity" type="number" data-id="@item.Product.ID" value="@item.Quantity" min="1"></td>
+                                                    <td>@(((item.Product.PromotionPrice.HasValue ? item.Product.PromotionPrice.Value : item.Product.Price.Value) * item.Quantity).ToString("N0"))</td>
+                                                </tr>
+                                                Total += Convert.ToInt32((item.Product.PromotionPrice.HasValue ? item.Product.PromotionPrice.Value : item.Product.Price.Value) * item.Quantity);
                                             }
                                             <tr>
                                                 <td colspan="6" class="aa-cart-view-bottom">
                                                     <div class="aa-cart-coupon">
-                                                        <input class="aa-coupon-code" type="text" placeholder="Mã giảm giá">
-                                                        <input class="aa-cart-view-btn" type="submit" value="Áp dụng giảm giá">
+                                                        <a href="javascript:history.go(-1)" class="aa-cart-view-btn">Tiếp tục lựa sản phẩm</a>
                                                     </div>
-                                                    
                                                     <input class="aa-cart-view-btn" id="btnUpdate" type="submit" value="cập nhật tính tiền">
                                                     <input class="aa-cart-view-btn" id="btnDeleteAll" type="submit" value="Xóa giỏ hàng">
                                                 </td>
@@ -66,21 +64,19 @@
                                 <table class="aa-totals-table">
                                     <tbody>
                                         <tr>
-                                            <th>Subtotal</th>
-                                            <td>$450</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Total</th>
-                                            <td>$450</td>
+                                            <th>Tổng:</th>
+                                            <td>@Total.ToString("N0") <sup>đ</sup></td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <a href="#" class="aa-cart-view-btn" id="btnPayment">Proced to Checkout</a>
+                                <a href="#" class="aa-cart-view-btn" id="btnPayment">Thanh toán</a>
                             </div>
                         }
                         else
                         {
-                            <span class="alert alert-danger">Chưa có sản phẩm nào trong giỏ hàng</span>
+                            <center>
+                                <span class="alert alert-danger">Giỏ hàng rỗng</span>
+                            </center>
                         }
 
                     </div>
@@ -90,33 +86,6 @@
     </div>
 </section>
 <!-- / Cart view section -->
-<!-- Subscribe section -->
-<!-- / Subscribe section -->
-<!-- footer -->
-<!-- / footer -->
-<!-- Login Modal -->
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4>Login or Register</h4>
-                <form class="aa-login-form" action="">
-                    <label for="">Username or Email address<span>*</span></label>
-                    <input type="text" placeholder="Username or email">
-                    <label for="">Password<span>*</span></label>
-                    <input type="password" placeholder="Password">
-                    <button class="aa-browse-btn" type="submit">Login</button>
-                    <label for="rememberme" class="rememberme"><input type="checkbox" id="rememberme"> Remember me </label>
-                    <p class="aa-lost-password"><a href="#">Lost your password?</a></p>
-                    <div class="aa-register-now">
-                        Don't have an account?<a href="account.html">Register now!</a>
-                    </div>
-                </form>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
 
 <!-- Code injected by live-server -->
 <script type="text/javascript">
