@@ -13,27 +13,11 @@ namespace LNBshop.Controllers
     public class ProductController : Controller
     {
         // GET: Product
-        public ActionResult Index(int page = 1, int pageSize = 6)
+        public ActionResult Index(int page = 1, int pageSize = 9)
         {
-            int totalRecord = 0;
-            var allProduct = new ProductDao().ListAllProduct(ref totalRecord, page, pageSize);
-
-            ViewBag.Total = totalRecord;
-            ViewBag.Page = page;
-
-            int maxPage = 5;
-            int totalPage = 0;
-
-            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
-            ViewBag.totalPage = totalPage;
-
-            ViewBag.maxPage = maxPage;
-            ViewBag.first = 1;
-            ViewBag.last = totalPage;
-            ViewBag.next = page + 1;
-            ViewBag.prev = page - 1;
-
-            return View(allProduct);
+            var dao = new ProductDao();
+            var model = dao.ListAllProduct(page, pageSize);
+            return View(model);
         }
 
         [ChildActionOnly]
@@ -43,7 +27,7 @@ namespace LNBshop.Controllers
             return PartialView(model);
         }
 
-        public ActionResult productCategory(long catId, int page = 1, int pageSize = 8)
+        public ActionResult productCategory(long catId, int page = 1, int pageSize = 9)
         {
             var category = new ClientCategoryDao().ViewDetail(catId);
             ViewBag.Category = category;

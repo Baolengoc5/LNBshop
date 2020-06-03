@@ -77,7 +77,7 @@
                             <td>@item.Name</td>
                             <td><img src="@item.Image" alt="@item.Name" height="84" width="84"></td>
                             <td>@item.CreatedDate</td>
-                            <td>@item.Price <sup>đ</sup></td>
+                            <td>@item.Price.Value.ToString("N0") <sup>đ</sup></td>
                             <td><strong><a href="#" class="btnProduct-active" data-id="@item.ID">@Html.Raw(item.Status ? "Kích hoạt" : "Khoá")</a></strong></td>
                         </tr>
                     }

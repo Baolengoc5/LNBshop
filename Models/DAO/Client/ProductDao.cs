@@ -1,4 +1,5 @@
 ﻿using Models.EF;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,11 @@ namespace Models.DAO.Client
             db = new LNBshopDbContext();
         }
 
-        public List<Product> ListAllProduct(ref int totalRecord, int pageIndex = 1, int pageSize = 6)
+        public IEnumerable<Product> ListAllProduct(int page, int pageSize)
         {
-            totalRecord = db.Products.Where(x => x.Status == true).Count();
-            var model = db.Products.Where(x => x.Status == true).OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
-            return model;
+            IQueryable<Product> model = db.Products;
+                model = model.Where(x => x.Status == true);
+            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
 
         public List<Product> ListNewProduct(int top)
@@ -33,7 +34,7 @@ namespace Models.DAO.Client
             return db.Products.Where( x=>x.Status == true && x.TopHot != null && x.TopHot > DateTime.Now).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
         }
 
-        public List<Product> ListProductCategory(long CatID,ref int totalRecord, int pageIndex = 1, int pageSize = 8)
+        public List<Product> ListProductCategory(long CatID,ref int totalRecord, int pageIndex = 1, int pageSize = 9)
         {
             totalRecord = db.Products.Where(x => x.Status == true && x.CategoryID == CatID).Count();
             var model = db.Products.Where(x => x.Status == true && x.CategoryID == CatID).OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
