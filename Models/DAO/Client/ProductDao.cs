@@ -16,6 +16,13 @@ namespace Models.DAO.Client
             db = new LNBshopDbContext();
         }
 
+        public List<Product> ListAllProduct(ref int totalRecord, int pageIndex = 1, int pageSize = 6)
+        {
+            totalRecord = db.Products.Where(x => x.Status == true).Count();
+            var model = db.Products.Where(x => x.Status == true).OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            return model;
+        }
+
         public List<Product> ListNewProduct(int top)
         {
             return db.Products.Where(x => x.Status == true).OrderByDescending(x => x.CreatedDate).Take(top).ToList();

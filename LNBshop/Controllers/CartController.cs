@@ -113,10 +113,12 @@ namespace LNBshop.Controllers
         {
             var cart = Session[CartSession];
             var list = new List<CartItem>();
+
             if (cart != null)
             {
                 list = (List<CartItem>)cart;
             }
+            
             return View(list);
         }
 
@@ -125,6 +127,7 @@ namespace LNBshop.Controllers
         {
             var order = new Order();
             order.CreatedDate = DateTime.Now;
+            order.Status = 0;
             order.ShipAddress = address;
             order.ShipMobile = mobile;
             order.ShipName = shipName;
@@ -132,32 +135,21 @@ namespace LNBshop.Controllers
 
             try
             {
-                //var id = new OrderDao().Insert(order);
-                //var cart = (List<CartItem>)Session[CartSession];
-                //var detailDao = new Model.Dao.OrderDetailDao();
-                //decimal total = 0;
-                //foreach (var item in cart)
-                //{
-                //    var orderDetail = new OrderDetail();
-                //    orderDetail.ProductID = item.Product.ID;
-                //    orderDetail.OrderID = id;
-                //    orderDetail.Price = item.Product.Price;
-                //    orderDetail.Quantity = item.Quantity;
-                //    detailDao.Insert(orderDetail);
+                var id = new ClientOrderDao().Insert(order);
+                var cart = (List<CartItem>)Session[CartSession];
+                var detailDao = new ClientOrderDetailDao();
+                decimal total = 0;
+                foreach (var item in cart)
+                {
+                    var orderDetail = new OrderDetail();
+                    orderDetail.ProductID = item.Product.ID;
+                    orderDetail.OrderID = id;
+                    orderDetail.Price = item.Product.Price;
+                    orderDetail.Quantity = item.Quantity;
+                    detailDao.Insert(orderDetail);
 
-                //    total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity);
-                //}
-                //string content = System.IO.File.ReadAllText(Server.MapPath("~/assets/client/template/neworder.html"));
-
-                //content = content.Replace("{{CustomerName}}", shipName);
-                //content = content.Replace("{{Phone}}", mobile);
-                //content = content.Replace("{{Email}}", email);
-                //content = content.Replace("{{Address}}", address);
-                //content = content.Replace("{{Total}}", total.ToString("N0"));
-                //var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
-
-                //new MailHelper().SendMail(email, "Đơn hàng mới từ OnlineShop", content);
-                //new MailHelper().SendMail(toEmail, "Đơn hàng mới từ OnlineShop", content);
+                    total += ((item.Product.PromotionPrice.HasValue ? item.Product.PromotionPrice.Value : item.Product.Price.Value) * item.Quantity);
+                }
             }
             catch (Exception ex)
             {

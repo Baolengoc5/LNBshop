@@ -1,0 +1,97 @@
+﻿@model List<LNBshop.Models.CartItem>
+@{
+    ViewBag.Title = "Thanh toán";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content">
+
+    <section id="cart-view">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cart-view-area">
+                        <div class="cart-view-table">
+                            @if (Model.Count > 0)
+                            {
+                                <form action="">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sản phẩm</th>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Gía tiền</th>
+                                                    <th>Số lượng</th>
+                                                    <th>Thành tiền</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                @{
+                                                    var Total = 0;
+                                                }
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td><a href="/chi-tiet/@item.Product.MetaTitle-@item.Product.ID"><img src="@item.Product.Image" alt="img"></a></td>
+                                                        <td><a class="aa-cart-title" href="#">@item.Product.Name</a></td>
+                                                        <td>@(item.Product.PromotionPrice.HasValue ? item.Product.PromotionPrice.Value.ToString("N0") : item.Product.Price.Value.ToString("N0"))<sup>đ</sup></td>
+                                                        <td><label>@item.Quantity</label></td>
+                                                        <td>@(((item.Product.PromotionPrice.HasValue ? item.Product.PromotionPrice.Value : item.Product.Price.Value) * item.Quantity).ToString("N0"))</td>
+                                                    </tr>
+                                                    Total += Convert.ToInt32((item.Product.PromotionPrice.HasValue ? item.Product.PromotionPrice.Value : item.Product.Price.Value) * item.Quantity);
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                                <!-- Cart Total view -->
+                                <div class="cart-view-total">
+                                    <h4>Tổng tiền giỏ hàng:</h4>
+                                    <table class="aa-totals-table">
+                                        <tbody>
+                                            <tr>
+                                                <th>Tổng:</th>
+                                                <td>@Total.ToString("N0") <sup>đ</sup></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="section group">
+                                    <div class="col-md-6">
+                                        @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+                                        {
+                                            <div class="form-group">
+                                                <label>Người nhận</label>
+                                                <input name="shipName" class="form-control" required />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Điện thoại</label>
+                                                <input name="mobile" class="form-control" type="number" required />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Địa chỉ</label>
+                                                <input name="address" class="form-control" required />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input name="email" class="form-control" type="email" required />
+                                            </div>
+                                            <button type="submit" class="aa-cart-view-btn">Gửi đơn hàng</button>
+                                        }
+                                    </div>
+                                </div>}
+                            else
+                            {
+                                <center>
+                                    <span class="alert alert-danger">Giỏ hàng rỗng</span>
+                                </center>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

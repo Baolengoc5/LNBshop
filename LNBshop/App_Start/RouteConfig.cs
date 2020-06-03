@@ -21,6 +21,13 @@ namespace LNBshop
             );
 
             routes.MapRoute(
+                name: "All Product",
+                url: "san-pham",
+                defaults: new { controller = "Product", action = "Index", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Product Category",
                 url: "san-pham/{metatitle}-{catId}",
                 defaults: new { controller = "Product", action = "productCategory", id = UrlParameter.Optional },
@@ -65,6 +72,20 @@ namespace LNBshop
                 name: "Add Cart",
                 url: "them-gio-hang",
                 defaults: new { controller = "Cart", action = "AddItem", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Payment",
+                url: "thanh-toan",
+                defaults: new { controller = "Cart", action = "Payment", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Success",
+                url: "hoan-thanh",
+                defaults: new { controller = "Cart", action = "Success", id = UrlParameter.Optional },
                 new[] { "LNBshop.Controllers" }
             );
 

@@ -1,8 +1,7 @@
 ﻿@model List<Models.EF.Product>
 
 @{
-    var category = (Models.EF.ProductCategory)ViewBag.Category;
-    ViewBag.Title = category.Name;
+    ViewBag.Title = "All Product";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
@@ -11,10 +10,10 @@
     <div class="aa-catg-head-banner-area">
         <div class="container">
             <div class="aa-catg-head-banner-content">
-                <h2>@category.Name</h2>
+                <h2>Tất cả sản phẩm</h2>
                 <ol class="breadcrumb">
                     <li><a href="/">Home</a></li>
-                    <li class="active">@category.Name</li>
+                    <li class="active">Tất cả sản phẩm</li>
                 </ol>
             </div>
         </div>
@@ -51,32 +50,32 @@
                             {
                                 <!-- start single product item -->
                                 var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
-                            <li>
-                                <figure>
-                                    <a class="aa-product-img" href="@url"><img src="@item.Image" width="250" height="300" alt="@item.Name"></a>
-                                    <a class="aa-add-card-btn" href="/them-gio-hang?productId=@item.ID&quantity=1"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
-                                    <figcaption>
-                                        <h4 class="aa-product-title"><a href="@url">@item.Name</a></h4>
-                                        <span class="aa-product-price"><b>@(item.PromotionPrice.HasValue? item.PromotionPrice.Value.ToString("N0"):item.Price.Value.ToString("N0"))</b><sup>đ</sup></span><span class="aa-product-price"><del>@(item.PromotionPrice.HasValue? "("+item.Price.Value.ToString("N0")+")":"")</del></span>
-                                    </figcaption>
-                                </figure>
-                                <div class="aa-product-hvr-content">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
-                                    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target=".quick-productCategory-@item.ID"><span class="fa fa-search"></span></a>
-                                </div>
+                                <li>
+                                    <figure>
+                                        <a class="aa-product-img" href="@url"><img src="@item.Image" width="250" height="300" alt="@item.Name"></a>
+                                        <a class="aa-add-card-btn" href="/them-gio-hang?productId=@item.ID&quantity=1"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                        <figcaption>
+                                            <h4 class="aa-product-title"><a href="@url">@item.Name</a></h4>
+                                            <span class="aa-product-price"><b>@(item.PromotionPrice.HasValue? item.PromotionPrice.Value.ToString("N0"):item.Price.Value.ToString("N0"))</b><sup>đ</sup></span><span class="aa-product-price"><del>@(item.PromotionPrice.HasValue? "("+item.Price.Value.ToString("N0")+")":"")</del></span>
+                                        </figcaption>
+                                    </figure>
+                                    <div class="aa-product-hvr-content">
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
+                                        <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target=".quick-productCategory-@item.ID"><span class="fa fa-search"></span></a>
+                                    </div>
 
 
-                                @if (item.PromotionPrice != null)
-                                {
-                                    <span class="aa-badge aa-sale" href="#">SALE!</span>
-                                }
-                                else if (item.TopHot > DateTime.Now)
-                                {
-                                    <span class="aa-badge aa-hot" href="#">HOT!</span>
-                                }
+                                    @if (item.PromotionPrice != null)
+                                    {
+                                        <span class="aa-badge aa-sale" href="#">SALE!</span>
+                                    }
+                                    else if (item.TopHot > DateTime.Now)
+                                    {
+                                        <span class="aa-badge aa-hot" href="#">HOT!</span>
+                                    }
 
-                            </li>
+                                </li>
                             }
 
                         </ul>
@@ -158,7 +157,7 @@
                                     var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
                                     var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
 
-                                    var link = "/san-pham/" + category.MetaTitle + "-" + category.ID;
+                                    var link = "/san-pham/";
                                     if (currentPage > ViewBag.First)
                                     {
                                         <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
@@ -272,7 +271,6 @@
                     </div>
                 </aside>
             </div>
-
         </div>
     </div>
 </section>

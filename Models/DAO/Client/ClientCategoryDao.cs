@@ -15,7 +15,7 @@ namespace Models.DAO.Client
             db = new LNBshopDbContext();
         }
 
-        public List<ProductCategory> ListbygroupID(bool showOnHome)
+        public List<ProductCategory> ListbygroupID()
         {
             return db.ProductCategories.Where(x =>x.Status == true).ToList();
         }

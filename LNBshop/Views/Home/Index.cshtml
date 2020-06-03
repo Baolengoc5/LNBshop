@@ -59,27 +59,30 @@
                                         @foreach (var item in hotProduct)
                                         {
                                             var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
-                                            <li>
-                                                <figure>
-                                                    <a class="aa-product-img" href="@url"><img src="@item.Image" width="250" height="300" alt="@item.Name"></a>
-                                                    <a class="aa-add-card-btn" href="/them-gio-hang?productId=@item.ID&quantity=1"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
-                                                    <figcaption>
-                                                        <h4 class="aa-product-title"><a href="@url">@item.Name</a></h4>
-                                                        <span class="aa-product-price">Giá: @(item.PromotionPrice.HasValue? item.PromotionPrice.Value.ToString("N0"):item.Price.Value.ToString("N0"))<sup>đ</sup></span><span class="aa-product-price"><del>@(item.PromotionPrice.HasValue? "("+item.Price.Value.ToString("N0")+")":"")</del></span>
-                                                    </figcaption>
-                                                </figure>
-                                                <div class="aa-product-hvr-content">
-                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
-                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
-                                                    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target=".quick-HotProduct-@item.ID"><span class="fa fa-search"></span></a>
-                                                </div>
-                                                <!-- product badge -->
-                                                @*
-                                                    <span class="aa-badge aa-sale" href="#">SALE!</span>
-                                                    <span class="aa-badge aa-sold-out" href="#">Sold Out!</span>
-                                                    <span class="aa-badge aa-hot" href="#">HOT!</span>
-                                                *@
-                                            </li>
+                                        <li>
+                                            <figure>
+                                                <a class="aa-product-img" href="@url"><img src="@item.Image" width="250" height="300" alt="@item.Name"></a>
+                                                <a class="aa-add-card-btn" href="/them-gio-hang?productId=@item.ID&quantity=1"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                                <figcaption>
+                                                    <h4 class="aa-product-title"><a href="@url">@item.Name</a></h4>
+                                                    <span class="aa-product-price">Giá: @(item.PromotionPrice.HasValue? item.PromotionPrice.Value.ToString("N0"):item.Price.Value.ToString("N0"))<sup>đ</sup></span><span class="aa-product-price"><del>@(item.PromotionPrice.HasValue? "("+item.Price.Value.ToString("N0")+")":"")</del></span>
+                                                </figcaption>
+                                            </figure>
+                                            <div class="aa-product-hvr-content">
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
+                                                <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target=".quick-HotProduct-@item.ID"><span class="fa fa-search"></span></a>
+                                            </div>
+                                            <!-- product badge -->
+                                            @if (item.PromotionPrice != null)
+                                            {
+                                                <span class="aa-badge aa-sale" href="#">SALE!</span>
+                                            }
+                                            else if (item.TopHot > DateTime.Now)
+                                            {
+                                                <span class="aa-badge aa-hot" href="#">HOT!</span>
+                                            }
+                                        </li>
                                         }
                                     </ul>
                                     <a class="aa-browse-btn" href="/san-pham">Xem thêm <span class="fa fa-long-arrow-right"></span></a>
@@ -126,11 +129,14 @@
                                                 <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target=".quick-@item.ID"><span class="fa fa-search"></span></a>
                                             </div>
                                             <!-- product badge -->
-                                            @*
+                                            @if (item.PromotionPrice != null)
+                                            {
                                                 <span class="aa-badge aa-sale" href="#">SALE!</span>
-                                                <span class="aa-badge aa-sold-out" href="#">Sold Out!</span>
+                                            }
+                                            else if (item.TopHot > DateTime.Now)
+                                            {
                                                 <span class="aa-badge aa-hot" href="#">HOT!</span>
-                                            *@
+                                            }
                                         </li>
 
                                     }
