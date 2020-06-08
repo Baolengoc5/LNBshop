@@ -2391,9 +2391,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\TopMenu.cshtml" />
     <Content Include="Views\Shared\MenuCategory.cshtml" />
-    <Content Include="Views\Shared\MainMenu.cshtml" />
     <Content Include="Views\Product\productCategory.cshtml" />
     <Content Include="Views\Product\productDetail.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />

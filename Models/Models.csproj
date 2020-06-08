@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="DAO\CategoryDao.cs" />
     <Compile Include="DAO\Client\ClientCategoryDao.cs" />
-    <Compile Include="DAO\Client\ClientMenuDao.cs" />
     <Compile Include="DAO\Client\ClientOrderDao.cs" />
     <Compile Include="DAO\Client\ClientOrderDetailDao.cs" />
     <Compile Include="DAO\Client\ContentDao.cs" />

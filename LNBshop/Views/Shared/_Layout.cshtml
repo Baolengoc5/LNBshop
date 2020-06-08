@@ -38,7 +38,8 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <!-- Vuejs -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 </head>
 <body>
@@ -52,40 +53,110 @@
     <!-- SCROLL TOP BUTTON -->
     <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
     <!-- END SCROLL TOP BUTTON -->
-    <!-- Start header section -->
-    @{ Html.RenderAction("TopMenu", "Home"); }
-    @{ Html.RenderAction("MainMenu", "Home"); }
-    <!-- start header bottom  -->
-    <div class="aa-header-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="aa-header-bottom-area">
-                        <!-- logo  -->
-                        <div class="aa-logo">
-                            <!-- Text based logo -->
-                            <a href="/trang-chu">
-                                <span class="fa fa-shopping-cart"></span>
-                                <p>LNB<strong>Shop</strong> <span>Hãy thỏa thích mua sắm !</span></p>
-                            </a>
+
+    <header id="aa-header">
+        <!-- start header top  -->
+        <div class="aa-header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-header-top-area">
+                            <!-- start header top left -->
+                            <div class="aa-header-top-left">
+                                <!-- start language -->
+                                <div class="aa-language">
+                                    <div class="dropdown">
+                                        <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            <img src="~/Data/Image/Language/vietnam.jpg" alt="english flag">VN
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li><a href="#"><img src="~/Data/Image/Language/vietnam.jpg" alt="">VN</a></li>
+                                            <li><a href="#"><img src="~/Data/Image/Language/english.jpg" alt="">ENG</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- / language -->
+                                <!-- start currency -->
+                                <div class="aa-currency">
+                                    <div class="">
+                                        <a class="btn" href="#" type="button" aria-haspopup="true" aria-expanded="true">
+                                            <i class="fa fa-money"></i>VND
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- / currency -->
+                                <!-- start cellphone -->
+                                <div class="cellphone hidden-xs">
+                                    <p><span class="fa fa-phone"></span>070-863-6775</p>
+                                </div>
+                                <!-- / cellphone -->
+                            </div>
+                            <!-- / header top left -->
+                            <div class="aa-header-top-right">
+                                <ul class="aa-head-top-nav-right" id="topmenu-vue">
+                                    <li v-for="item in items" v-html="item.topmenu">{{item.topmenu}}</li>
+                                </ul>
+                            </div>
                         </div>
-                        <!-- / logo  -->
-                        <!-- cart box -->
-                        @{Html.RenderAction("HeaderCart", "Home");}
-                        <!-- / cart box -->
-                        <!-- search box -->
-                        <div class="aa-search-box">
-                            <form action="">
-                                <input type="text" name="" id="" placeholder="Tìm kiếm ">
-                                <button type="submit"><span class="fa fa-search"></span></button>
-                            </form>
-                        </div>
-                        <!-- / search box -->
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <!-- / header top  -->
+        <!-- Start Main menu -->
+        <div class="aa-header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-header-top-area">
+                            <!-- start header top left -->
+                            <div class="aa-header-top-right">
+                                <ul class="aa-head-top-nav-right" id="mainmenu-vue">
+                                    <li v-for="item in items" v-html="item.mainmenu">{{item.mainmenu}}</li>
+
+                                </ul>
+                            </div>
+                            <!-- / header top left -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /Main menu  -->
+        <!-- start header bottom  -->
+        <div class="aa-header-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-header-bottom-area">
+                            <!-- logo  -->
+                            <div class="aa-logo">
+                                <!-- Text based logo -->
+                                <a href="/trang-chu">
+                                    <span class="fa fa-shopping-cart"></span>
+                                    <p>LNB<strong>Shop</strong> <span>Hãy thỏa thích mua sắm !</span></p>
+                                </a>
+                            </div>
+                            <!-- / logo  -->
+                            <!-- cart box -->
+                            @{Html.RenderAction("HeaderCart", "Home");}
+                            <!-- / cart box -->
+                            <!-- search box -->
+                            <div class="aa-search-box">
+                                <form action="">
+                                    <input type="text" name="" id="" placeholder="Tìm kiếm ">
+                                    <button type="submit"><span class="fa fa-search"></span></button>
+                                </form>
+                            </div>
+                            <!-- / search box -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </header>
     <!-- / header bottom  -->
@@ -201,8 +272,40 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer>\
+
+
     <!-- / footer -->
+    <!--Script Vuejs-->
+    <!--Top menu-->
+
+    <script>
+        var TopMenuVue = new Vue({
+            el: '#topmenu-vue',
+            data: {
+                items: [
+                    { topmenu: '<a href="/Admin/Login" target="_self">Đăng nhập</a>' },
+                    { topmenu: '<a href="/Admin/Register" target="_self">Đăng ký</a>' },
+                ]
+            }
+        })
+    </script>
+    <!--Main menu-->
+
+    <script>
+        var MainMenuVue = new Vue({
+            el: '#mainmenu-vue',
+            data: {
+                items: [
+                    { mainmenu: '<a href="/gioi-thieu" target="_self">Giới thiệu</a>' },
+                    { mainmenu: '<a href="/tin-tuc" target="_self">Tin tức</a>' },
+                    { mainmenu: '<a href="/san-pham" target="_self">Sản phẩm</a>' },
+                    { mainmenu: '<a href="/lien-he" target="_self">Liên hệ</a>' }
+                ]
+            }
+        })
+    </script>
+    <!-- / Script Vuejs-->
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

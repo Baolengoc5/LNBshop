@@ -37,20 +37,6 @@ namespace LNBshop.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult TopMenu()
-        {
-            var model = new ClientMenuDao().ListbygroupID(2);
-            return PartialView(model);
-        }
-
-        [ChildActionOnly]
-        public ActionResult MainMenu()
-        {
-            var model = new ClientMenuDao().ListbygroupID(1);
-            return PartialView(model);
-        }
-
-        [ChildActionOnly]
         public PartialViewResult HeaderCart()
         {
             var cart = Session[CommonConstants.CartSession];
