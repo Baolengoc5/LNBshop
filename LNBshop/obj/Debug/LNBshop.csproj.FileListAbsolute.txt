@@ -178,3 +178,5 @@ D:\Baocaototnghiep\Source\LNBshop\LNBshop\obj\Debug\LNBshop.csproj.CoreCompileIn
 D:\Baocaototnghiep\Source\LNBshop\LNBshop\obj\Debug\LNBshop.csproj.CopyComplete
 D:\Baocaototnghiep\Source\LNBshop\LNBshop\obj\Debug\LNBshop.dll
 D:\Baocaototnghiep\Source\LNBshop\LNBshop\obj\Debug\LNBshop.pdb
+D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\Common.dll
+D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\Common.pdb

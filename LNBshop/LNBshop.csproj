@@ -2116,6 +2116,7 @@
     <Content Include="Assets\Client\js\sequence-theme.modern-slide-in.js" />
     <Content Include="Assets\Client\js\sequence.js" />
     <Content Include="Assets\Client\js\slick.js" />
+    <Content Include="Assets\Client\template\Neworder.html" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -2419,6 +2420,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{8e547f17-feb6-428e-9a77-761656907e7a}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{4a55a411-1bad-4d5c-ac2f-c0046f09c14b}</Project>
       <Name>Models</Name>

@@ -1,4 +1,5 @@
-﻿using LNBshop.Models;
+﻿using Common;
+using LNBshop.Models;
 using Models.DAO.Client;
 using Models.EF;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+
 
 namespace LNBshop.Controllers
 {
@@ -150,6 +152,18 @@ namespace LNBshop.Controllers
 
                     total += ((item.Product.PromotionPrice.HasValue ? item.Product.PromotionPrice.Value : item.Product.Price.Value) * item.Quantity);
                 }
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/assets/client/template/Neworder.html"));
+
+                content = content.Replace("{{CustomerName}}", shipName);
+                content = content.Replace("{{Phone}}", mobile);
+                content = content.Replace("{{Email}}", email);
+                content = content.Replace("{{Address}}", address);
+                content = content.Replace("{{Total}}", total.ToString("N0"));
+                var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+                new MailHelper().SendMail(email, "Đơn hàng mới từ LNBshop", content);
+                new MailHelper().SendMail(toEmail, "Đơn hàng mới từ LNBshop", content);
+
             }
             catch (Exception ex)
             {
