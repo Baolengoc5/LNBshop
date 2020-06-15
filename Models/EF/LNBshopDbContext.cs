@@ -184,6 +184,10 @@ namespace Models.EF
                 .Property(e => e.ModifiedBy)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<User>()
+                .Property(e => e.CodeConfirmEmail)
+                .IsUnicode(false);
+
             modelBuilder.Entity<UserGroup>()
                 .Property(e => e.ID)
                 .IsUnicode(false);

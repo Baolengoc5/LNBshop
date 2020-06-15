@@ -34,6 +34,7 @@ namespace LNBshop.Models
 
         [Required(ErrorMessage = "Yêu cầu nhập email")]
         [Display(Name = "Email")]
+        [EmailAddress(ErrorMessage ="Phải nhập đúng email")]
         public string Email { set; get; }
 
         [Display(Name = "Điện thoại")]

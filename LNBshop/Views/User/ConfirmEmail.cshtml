@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "ConfirmEmail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container">
+        <h2>Xác thực tài khoản</h2>
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success">@ViewBag.Success</div>
+        }
+        else
+        {
+            <div class="alert alert-danger">@ViewBag.Error</div>
+        }
+    </div>
+
+

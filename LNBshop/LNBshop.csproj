@@ -71,6 +71,7 @@
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.113.1\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -2127,6 +2128,7 @@
     <Content Include="Assets\Client\js\sequence-theme.modern-slide-in.js" />
     <Content Include="Assets\Client\js\sequence.js" />
     <Content Include="Assets\Client\js\slick.js" />
+    <Content Include="Assets\Client\template\NewAccount.html" />
     <Content Include="Assets\Client\template\Neworder.html" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
@@ -2412,6 +2414,7 @@
     <Content Include="Views\Cart\Success.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\ConfirmEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2421,6 +2424,7 @@
     <Folder Include="Data\Image\Product\" />
     <Folder Include="Data\Image\Slide\" />
     <Folder Include="Data\Image\Source\" />
+    <Folder Include="Views\Email\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

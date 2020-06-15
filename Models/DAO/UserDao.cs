@@ -45,7 +45,7 @@ namespace Models.DAO
                 db.SaveChanges();
                 return true;
             }
-            catch(Exception ex)//xử lý các trường hợp ngoại lệ
+            catch (Exception ex)//xử lý các trường hợp ngoại lệ
             {
                 return false;
             }
@@ -77,12 +77,12 @@ namespace Models.DAO
         }
 
         //Hiển thị danh sách
-        public IEnumerable<User> ListAllPaging(string searchString,int page, int pageSize)
+        public IEnumerable<User> ListAllPaging(string searchString, int page, int pageSize)
         {
             IQueryable<User> model = db.Users;
             if (!string.IsNullOrEmpty(searchString))//nếu searchString khác null
             {
-                model = model.Where(x=>x.UserName.Contains(searchString) || x.Name.Contains(searchString));
+                model = model.Where(x => x.UserName.Contains(searchString) || x.Name.Contains(searchString));
                 //OrderByDescending(x=>x.CreatedDate) là sắp xếp theo ngày tạo
                 //.Contains(searchString) là tìm kiếm gần giống
             }
@@ -145,6 +145,29 @@ namespace Models.DAO
         public bool CheckEmail(string email)
         {
             return db.Users.Count(x => x.Email == email) > 0;
+        }
+
+        public bool ConfirmEmailAccount(User entity)
+        {
+            try
+            {
+                var user = db.Users.SingleOrDefault(x => x.UserName == entity.UserName && x.CodeConfirmEmail == entity.CodeConfirmEmail);
+                if (user == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    user.Status = true;
+                    db.SaveChanges();
+                    return true;
+                }
+
+            }
+            catch (Exception ex)//xử lý các trường hợp ngoại lệ
+            {
+                return false;
+            }
         }
     }
 }

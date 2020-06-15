@@ -163,7 +163,6 @@ namespace LNBshop.Controllers
 
                 new MailHelper().SendMail(email, "Đơn hàng mới từ LNBshop", content);
                 new MailHelper().SendMail(toEmail, "Đơn hàng mới từ LNBshop", content);
-
             }
             catch (Exception ex)
             {

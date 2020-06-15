@@ -47,5 +47,8 @@ namespace Models.EF
         public string ModifiedBy { get; set; }
 
         public bool Status { get; set; }
+
+        [StringLength(5)]
+        public string CodeConfirmEmail { get; set; }
     }
 }
