@@ -180,3 +180,8 @@ D:\Baocaototnghiep\Source\LNBshop\LNBshop\obj\Debug\LNBshop.dll
 D:\Baocaototnghiep\Source\LNBshop\LNBshop\obj\Debug\LNBshop.pdb
 D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\Common.dll
 D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\Common.pdb
+D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\BotDetect.dll
+D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\BotDetect.Web.Mvc.dll
+D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\System.Data.SQLite.dll
+D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\System.Data.SQLite.xml
+D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\System.Data.SQLite.dll.config

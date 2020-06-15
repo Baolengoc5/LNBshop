@@ -71,14 +71,10 @@
     <Compile Include="DAO\ProductCategoryDao.cs" />
     <Compile Include="DAO\ProductDao.cs" />
     <Compile Include="DAO\UserDao.cs" />
-    <Compile Include="EF\About.cs" />
     <Compile Include="EF\Category.cs" />
-    <Compile Include="EF\Contact.cs" />
     <Compile Include="EF\Content.cs" />
     <Compile Include="EF\ContentTag.cs" />
     <Compile Include="EF\Credential.cs" />
-    <Compile Include="EF\Feedback.cs" />
-    <Compile Include="EF\Footer.cs" />
     <Compile Include="EF\Language.cs" />
     <Compile Include="EF\LNBshopDbContext.cs" />
     <Compile Include="EF\Menu.cs" />

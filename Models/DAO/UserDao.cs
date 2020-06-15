@@ -136,5 +136,15 @@ namespace Models.DAO
             //Cách này cũng giống với hàm GetByUserName ở trên
             //Nhưng tìm khóa chính thì cách này ngắn hơn
         }
+
+        //Register của user CLIENT
+        public bool CheckUserName(string userName)
+        {
+            return db.Users.Count(x => x.UserName == userName) > 0;
+        }
+        public bool CheckEmail(string email)
+        {
+            return db.Users.Count(x => x.Email == email) > 0;
+        }
     }
 }
