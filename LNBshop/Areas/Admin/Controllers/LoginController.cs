@@ -24,7 +24,7 @@ namespace LNBshop.Areas.Admin.Controllers
             {
                 var dao = new UserDao();// tạo một biến để dùng object UserDao
                 var result = dao.Login(model.UserName, Encryptor.MD5Hash(model.PassWord));//mã hóa bằng MD5
-                if (result == 1)//kiểm tra username password nếu true
+                if (result == 3)//kiểm tra username password nếu true
                 {
                     var User = dao.GetByUserName(model.UserName);//tạo biến lấy dữ liệu từ GetByUserName bên UserDao
                     var userSession = new UserLogin();
@@ -37,7 +37,10 @@ namespace LNBshop.Areas.Admin.Controllers
                     //Chuyển trang tới nơi yêu cầu
                     return RedirectToAction("Index","Home");
                 }
-                else if(result == 0)
+                else if (result == 1)
+                {
+                    ModelState.AddModelError("", "Bạn không đủ quyền hạn để truy cập khu vực này !");
+                }else if(result == 0)
                 {
                     ModelState.AddModelError("","Tài khoản không tồn tại !");
                 }else if (result == -1)

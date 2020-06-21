@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace LNBshop.Areas.Admin.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         // GET: Admin/Product
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)

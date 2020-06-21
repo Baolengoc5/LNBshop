@@ -21,8 +21,13 @@ namespace LNBshop.Controllers
             return View();
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         [HttpPost]
-        [CaptchaValidation("CaptchaCode", "registerCapcha", "Mã xác nhận không đúng!")]
+        [CaptchaValidation("CaptchaCode", "registerCaptcha", "Mã xác nhận không đúng!")]
         public ActionResult Register(RegisterModel model, string email)
         {
             if (ModelState.IsValid)
@@ -48,23 +53,12 @@ namespace LNBshop.Controllers
                     user.UserName = model.UserName;
                     user.Name = model.Name;
                     user.Password = Encryptor.MD5Hash(model.Password);
-                    user.Phone = model.Phone;
                     user.Email = model.Email;
-                    user.Address = model.Address;
                     user.CreatedDate = DateTime.Now;
                     user.Status = false;
                     user.GroupID = "MEMBER";
                     user.CodeConfirmEmail = cCodeConfirmEmail;
 
-
-                    //if (!string.IsNullOrEmpty(model.ProvinceID))
-                    //{
-                    //    user.ProvinceID = int.Parse(model.ProvinceID);
-                    //}
-                    //if (!string.IsNullOrEmpty(model.DistrictID))
-                    //{
-                    //    user.DistrictID = int.Parse(model.DistrictID);
-                    //}
 
                     var result = dao.Insert(user);
                     
@@ -82,11 +76,49 @@ namespace LNBshop.Controllers
                         
                         ViewBag.Success = "Đăng ký thành công! hãy xác nhận thư trong hộp thư Email để mở khóa tài khoản của bạn";
                         model = new RegisterModel();
+                        MvcCaptcha.ResetCaptcha("registerCaptcha");
                     }
                     else
                     {
                         ModelState.AddModelError("", "Đăng ký không thành công.");
+                        MvcCaptcha.ResetCaptcha("registerCaptcha");
                     }
+                }
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginModel model)
+        {
+            if (ModelState.IsValid)//Kiểm tra form có nhập đầy đủ chưa
+            {
+                var dao = new UserDao();// tạo một biến để dùng object UserDao
+                var result = dao.Login(model.UserName, Encryptor.MD5Hash(model.Password));//mã hóa bằng MD5
+                if (result == 1 || result == 3)//kiểm tra username password nếu true
+                {
+                    var User = dao.GetByUserName(model.UserName);//tạo biến lấy dữ liệu từ GetByUserName bên UserDao
+                    var userSession = new UserLogin();
+                    //Lưu username với ID vào biến được tạo
+                    userSession.UserName = User.UserName;
+                    userSession.UserID = User.ID;
+
+                    //Lưu SESSION
+                    Session.Add(CommonConstants.USER_SESSION, userSession);
+                    //Chuyển trang tới nơi yêu cầu
+                    return Redirect("/");
+                }
+                else if (result == 0)
+                {
+                    ModelState.AddModelError("", "Tài khoản không tồn tại !");
+                }
+                else if (result == -1)
+                {
+                    ModelState.AddModelError("", "Tài khoản này đang bị khóa !");
+                }
+                else if (result == -2)
+                {
+                    ModelState.AddModelError("", "Mật khẩu không đúng !");
                 }
             }
             return View(model);
@@ -107,6 +139,12 @@ namespace LNBshop.Controllers
                 ViewBag.Error = "Liên kết không còn khả dụng";
             }
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session[CommonConstants.USER_SESSION] = null;
+            return Redirect("/");
         }
     }
 }

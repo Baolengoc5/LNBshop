@@ -95,7 +95,19 @@
                             <!-- / header top left -->
                             <div class="aa-header-top-right">
                                 <ul class="aa-head-top-nav-right" id="topmenu-vue">
-                                    <li v-for="item in items" v-html="item.topmenu">{{item.topmenu}}</li>
+                                    @{
+                                        var session = (LNBshop.Common.UserLogin) Session[LNBshop.Common.CommonConstants.USER_SESSION];
+                                    }
+                                    @if (session == null)
+                                    {
+                                        <li v-for="item in items" v-html="item.topmenu">{{item.topmenu}}</li>
+
+                                    }
+                                    else
+                                    {
+                                            <li>Xin chào:@session.UserName</li>
+                                            <li>@Html.ActionLink("Đăng xuất", "Logout", "User")</li>
+                                    }
                                 </ul>
                             </div>
                         </div>
@@ -284,8 +296,8 @@
             el: '#topmenu-vue',
             data: {
                 items: [
-                    { topmenu: '<a href="/Admin/Login" target="_self">Đăng nhập</a>' },
-                    { topmenu: '<a href="/Admin/Register" target="_self">Đăng ký</a>' },
+                    { topmenu: '<a href="/dang-nhap" target="_self">Đăng nhập</a>' },
+                    { topmenu: '<a href="/dang-ky" target="_self">Đăng ký</a>' },
                 ]
             }
         })

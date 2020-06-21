@@ -23,6 +23,20 @@ namespace LNBshop
             );
 
             routes.MapRoute(
+                name: "Login",
+                url: "dang-nhap",
+                defaults: new { controller = "User", action = "Login", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Register",
+                url: "dang-ky",
+                defaults: new { controller = "User", action = "Register", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "All Product",
                 url: "san-pham",
                 defaults: new { controller = "Product", action = "Index", id = UrlParameter.Optional },
@@ -60,13 +74,6 @@ namespace LNBshop
                 name: "Product",
                 url: "san-pham",
                 defaults: new { controller = "Product", action = "AllProduct", id = UrlParameter.Optional },
-                new[] { "LNBshop.Controllers" }
-            );
-
-            routes.MapRoute(
-                name: "Register",
-                url: "dang-ky",
-                defaults: new { controller = "User", action = "Register", id = UrlParameter.Optional },
                 new[] { "LNBshop.Controllers" }
             );
 

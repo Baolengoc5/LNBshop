@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace LNBshop.Areas.Admin.Controllers
 {
-    public class ContentCategoryController : Controller
+    public class ContentCategoryController : BaseController
     {
         // GET: Admin/ContentCategory
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)

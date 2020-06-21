@@ -152,7 +152,6 @@
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
-    <Compile Include="Areas\Admin\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Common\CommonConstants.cs" />
@@ -166,6 +165,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2318,7 +2318,6 @@
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Content\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Content\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Register\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ForgotPassword\Index.cshtml" />
     <Content Include="Assets\Admin\js\plugins\ckeditor\CHANGES.md" />
     <Content Include="Assets\Admin\js\plugins\ckeditor\LICENSE.md" />
@@ -2415,6 +2414,7 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\ConfirmEmail.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

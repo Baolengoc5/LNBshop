@@ -108,7 +108,11 @@ namespace Models.DAO
                 {
                     if (result.Password == passWord)
                     {
-                        return 1;
+                        if (result.GroupID == "MOD" || result.GroupID == "ADMIN")
+                        {
+                            return 3;
+                        }
+                            return 1;
                     }
                     else
                     {

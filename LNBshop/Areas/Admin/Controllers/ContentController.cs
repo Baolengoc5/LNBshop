@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace LNBshop.Areas.Admin.Controllers
 {
-    public class ContentController : Controller
+    public class ContentController : BaseController
     {
         // GET: Admin/Content
 
