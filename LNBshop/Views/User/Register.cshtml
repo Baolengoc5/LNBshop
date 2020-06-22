@@ -3,19 +3,18 @@
 
 <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
       rel="stylesheet" type="text/css" />
-@{ MvcCaptcha registerCapcha = new MvcCaptcha("registerCapcha");
-    registerCapcha.UserInputID = "CaptchaCode";
+@{ MvcCaptcha registerCaptcha = new MvcCaptcha("registerCaptcha");
+    registerCaptcha.UserInputID = "CaptchaCode";
 }
-
 @{
     ViewBag.Title = "Đăng ký";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*@section jsFooter
-{
 
+@section jsFooter
+{
     <script src="/assets/client/js/controller/userController.js"></script>
-}*@
+}
 <div class="container">
     @using (Html.BeginForm("Register", "User", FormMethod.Post))
     {
@@ -66,14 +65,30 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control",@type = "Email" })
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @type = "Email" , @pattern = ".+@gmail.com", @title = "Hãy nhập đúng cú pháp với .+@gmail.com" })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
+                @Html.LabelFor(model => model.ProvinceID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ProvinceID", new SelectList(new string[] { }), new { @class = "form-control", @id = "ddlProvince" })
+                    @Html.ValidationMessageFor(model => model.ProvinceID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DistrictID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("DistrictID", new SelectList(new string[] { }), new { @class = "form-control", @id = "ddlDistrict" })
+                    @Html.ValidationMessageFor(model => model.DistrictID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    @Html.Captcha(registerCapcha)
+                    @Html.Captcha(registerCaptcha)
                     @Html.TextBox("CaptchaCode")
                 </div>
             </div>

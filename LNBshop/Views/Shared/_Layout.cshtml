@@ -289,34 +289,35 @@
 
     <!-- / footer -->
     <!--Script Vuejs-->
-    <!--Top menu-->
 
-    <script>
-        var TopMenuVue = new Vue({
-            el: '#topmenu-vue',
-            data: {
-                items: [
-                    { topmenu: '<a href="/dang-nhap" target="_self">Đăng nhập</a>' },
-                    { topmenu: '<a href="/dang-ky" target="_self">Đăng ký</a>' },
-                ]
-            }
-        })
-    </script>
-    <!--Main menu-->
+        <!--Top menu-->
+        <script>
+            var TopMenuVue = new Vue({
+                el: '#topmenu-vue',
+                data: {
+                    items: [
+                        { topmenu: '<a href="/dang-nhap" target="_self">Đăng nhập</a>' },
+                        { topmenu: '<a href="/dang-ky" target="_self">Đăng ký</a>' },
+                    ]
+                }
+            })
+        </script>
 
-    <script>
-        var MainMenuVue = new Vue({
-            el: '#mainmenu-vue',
-            data: {
-                items: [
-                    { mainmenu: '<a href="/gioi-thieu" target="_self">Giới thiệu</a>' },
-                    { mainmenu: '<a href="/tin-tuc" target="_self">Tin tức</a>' },
-                    { mainmenu: '<a href="/san-pham" target="_self">Sản phẩm</a>' },
-                    { mainmenu: '<a href="/lien-he" target="_self">Liên hệ</a>' }
-                ]
-            }
-        })
-    </script>
+        <!--Main menu-->
+        <script>
+            var MainMenuVue = new Vue({
+                el: '#mainmenu-vue',
+                data: {
+                    items: [
+                        { mainmenu: '<a href="/gioi-thieu" target="_self">Giới thiệu</a>' },
+                        { mainmenu: '<a href="/tin-tuc" target="_self">Tin tức</a>' },
+                        { mainmenu: '<a href="/san-pham" target="_self">Sản phẩm</a>' },
+                        { mainmenu: '<a href="/lien-he" target="_self">Liên hệ</a>' }
+                    ]
+                }
+            })
+        </script>
+
     <!-- / Script Vuejs-->
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -340,5 +341,7 @@
     <script src="~/Assets/Client/js/custom.js"></script>
 
     <script src="/assets/client/js/controller/cartController.js"></script>
+
+    @RenderSection("jsfooter",required:false);
 </body>
 </html>

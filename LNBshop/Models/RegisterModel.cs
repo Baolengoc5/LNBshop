@@ -40,12 +40,12 @@ namespace LNBshop.Models
         [Display(Name = "Điện thoại")]
         public string Phone { set; get; }
 
-        //[Display(Name = "Tỉnh/thành")]
-        //public string ProvinceID { set; get; }
+        [Display(Name = "Tỉnh/thành")]
+        public string ProvinceID { set; get; }
 
 
-        //[Display(Name = "Quận/Quyện")]
-        //public string DistrictID { set; get; }
+        [Display(Name = "Quận/Quyện")]
+        public string DistrictID { set; get; }
 
         public string CaptchaCode { get; set; }
 

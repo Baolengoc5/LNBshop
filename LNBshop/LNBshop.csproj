@@ -168,7 +168,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\DistrictModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ProvinceModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2118,10 +2120,12 @@
     <Content Include="Assets\Client\css\theme-color\purple-theme.css" />
     <Content Include="Assets\Client\css\theme-color\red-theme.css" />
     <Content Include="Assets\Client\css\theme-color\yellow-theme.css" />
+    <Content Include="Assets\Client\Data\Provinces_Data.xml" />
     <Content Include="Assets\Client\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\Client\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\Client\js\bootstrap.js" />
     <Content Include="Assets\Client\js\Controller\cartController.js" />
+    <Content Include="Assets\Client\js\Controller\userController.js" />
     <Content Include="Assets\Client\js\custom.js" />
     <Content Include="Assets\Client\js\jquery.simpleGallery.js" />
     <Content Include="Assets\Client\js\jquery.simpleLens.js" />
