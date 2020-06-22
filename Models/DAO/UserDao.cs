@@ -24,6 +24,21 @@ namespace Models.DAO
             return entity.ID;
         }
 
+        public long InsertForFacebook(User entity)//tạo hàm chức năng Insert kiểu dữ liệu long vì trả về ID kiểu bigint
+        {
+            var user = db.Users.SingleOrDefault(x => x.UserName == entity.UserName);
+            if (user == null)
+            {
+                db.Users.Add(entity);//phương thức thêm trong entity
+                db.SaveChanges();//Lưu thay đổi trong database
+                return entity.ID;
+            }
+            else
+            {
+                return user.ID;
+            }
+        }
+
         //Sửa
         public bool Update(User entity)
         {
@@ -112,7 +127,7 @@ namespace Models.DAO
                         {
                             return 3;
                         }
-                            return 1;
+                        return 1;
                     }
                     else
                     {

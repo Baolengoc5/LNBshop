@@ -185,3 +185,5 @@ D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\BotDetect.Web.Mvc.dll
 D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\System.Data.SQLite.dll
 D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\System.Data.SQLite.xml
 D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\System.Data.SQLite.dll.config
+D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\Facebook.dll
+D:\Baocaototnghiep\Source\LNBshop\LNBshop\bin\Facebook.xml
