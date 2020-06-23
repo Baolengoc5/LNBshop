@@ -43,16 +43,24 @@
                                     @foreach (var item in Model)
                                     {
                                         var link = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
-                                        <li>
-                                            <figure>
-                                                <a class="aa-product-img" href="@link"><img src="@item.Images" width="250" height="300" alt="@item.Name"></a>
-                                                <a class="aa-add-card-btn" href="/them-gio-hang?productId=@item.ID&quantity=1"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
-                                                <figcaption>
-                                                    <h4 class="aa-product-title"><a href="@link">@item.Name</a></h4>
-                                                    <span class="aa-product-price">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")<sup>đ</sup></span>
-                                                </figcaption>
-                                            </figure>
-                                        </li>
+                                    <li>
+                                        <figure>
+                                            <a class="aa-product-img" href="@link"><img src="@item.Images" width="250" height="300" alt="@item.Name"></a>
+                                            <a class="aa-add-card-btn" href="/them-gio-hang?productId=@item.ID&quantity=1"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                            <figcaption>
+                                                <h4 class="aa-product-title"><a href="@link">@item.Name</a></h4>
+                                                <span class="aa-product-price"><b>@(item.PromotionPrice.HasValue? item.PromotionPrice.Value.ToString("N0"):item.Price.Value.ToString("N0"))</b><sup>đ</sup></span><span class="aa-product-price"><del>@(item.PromotionPrice.HasValue? "("+item.Price.Value.ToString("N0")+")":"")</del></span>
+                                            </figcaption>
+                                        </figure>
+                                        @if (item.PromotionPrice != null)
+                                        {
+                                            <span class="aa-badge aa-sale" href="#">SALE!</span>
+                                        }
+                                        else if (item.TopHot > DateTime.Now)
+                                        {
+                                            <span class="aa-badge aa-hot" href="#">HOT!</span>
+                                        }
+                                    </li>
                                     }
                                 </ul>
                             </div>

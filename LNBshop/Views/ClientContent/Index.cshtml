@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Models.EF.Content>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <section id="aa-catg-head-banner">
+        <img src="~/Data/Image/Source/branch-store-1920x300.jpg" alt="source img">
+        <div class="aa-catg-head-banner-area">
+            <div class="container">
+                <div class="aa-catg-head-banner-content">
+                    <h2>Tất cả tin tức</h2>
+                    <ol class="breadcrumb">
+                        <li><a href="/">Home</a></li>
+                        <li class="active">Tất cả tin tức</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="aa-product-category">
+        <div class="container">
+            <div class="row">
+                <div class="container">
+                    <div class="aa-product-catg-content">
+                        <div class="aa-product-catg-head">
+                        </div>
+                        <div class="aa-product-catg-body">
+                            <ul class="aa-product-catg">
+
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-md-4 col-sm-4">
+                                        <div class="aa-latest-blog-single">
+                                            <figure class="aa-blog-img">
+                                                <a href="/tin-tuc/@item.MetaTitle-@item.ID"><img src="@item.Image" alt="@item.Name"></a>
+                                                <figcaption class="aa-blog-img-caption">
+                                                    <span href="#"><i class="fa fa-eye"></i>@item.ViewCount</span>
+                                                    <a href="#"><i class="fa fa-thumbs-o-up"></i>426</a>
+                                                    <a href="#"><i class="fa fa-comment-o"></i>20</a>
+                                                    <span href="#"><i class="fa fa-clock-o"></i>@item.CreatedDate</span>
+                                                </figcaption>
+                                            </figure>
+                                            <div class="aa-blog-info">
+                                                <h3 class="aa-blog-title"><a href="/tin-tuc/@item.MetaTitle-@item.ID">@item.Name</a></h3>
+                                                <p>@item.Description</p>
+                                                <a href="/tin-tuc/@item.MetaTitle-@item.ID" class="aa-read-mor-btn">Read more <span class="fa fa-long-arrow-right"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+        @if (ViewBag.TotalPage > 1)
+        {
+            var pageDisplay = (int)ViewBag.MaxPage;
+            int totalPage = (int)ViewBag.TotalPage;
+            int currentPage = ((int)ViewBag.Page);
+
+            // Create numeric links
+            var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+            var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+            var link = "/tin-tuc";
+            <nav>
+                <ul class="pagination">
+                    @if (currentPage > ViewBag.First)
+                    {
+                        <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                        <li>
+                            <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a>
+                        </li>
+
+                    }
+                    @for (int i = startPageIndex; i <= endPageIndex; i++)
+                    {
+                        if (currentPage == i)
+                        {
+
+                            <li> <a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@link?page=@i" title="Trang @i" class="pos">@i</a></li>
+                        }
+                    }
+                    @if (currentPage < totalPage)
+                    {
+                        <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                        <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                    }
+
+                </ul>
+            </nav>
+
+        }
+    </div>

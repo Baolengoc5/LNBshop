@@ -73,9 +73,23 @@ namespace LNBshop
             routes.MapRoute(
                 name: "Content",
                 url: "tin-tuc",
-                defaults: new { controller = "Content", action = "AllContent", id = UrlParameter.Optional },
+                defaults: new { controller = "ClientContent", action = "Index", id = UrlParameter.Optional },
                 new[] { "LNBshop.Controllers" }
             );
+
+            routes.MapRoute(
+             name: "Content Detail",
+             url: "tin-tuc/{metatitle}-{id}",
+             defaults: new { controller = "ClientContent", action = "Detail", id = UrlParameter.Optional },
+             new[] { "OnlineShop.Controllers" }
+         );
+
+            routes.MapRoute(
+             name: "Tags",
+             url: "tag/{tagId}",
+             defaults: new { controller = "ClientContent", action = "Tag", id = UrlParameter.Optional },
+             namespaces: new[] { "OnlineShop.Controllers" }
+         );
 
             routes.MapRoute(
                 name: "Product",

@@ -46,7 +46,9 @@ namespace Models.DAO.Client
                              Images = a.Image,
                              Name = a.Name,
                              MetaTitle = a.MetaTitle,
-                             Price = a.Price
+                             Price = a.Price,
+                             PromotionPrice = a.PromotionPrice,
+                             TopHot = a.TopHot
                          }).AsEnumerable().Select(x => new ProductViewModel()
                          {
                              CateMetaTitle = x.MetaTitle,
@@ -56,7 +58,9 @@ namespace Models.DAO.Client
                              Images = x.Images,
                              Name = x.Name,
                              MetaTitle = x.MetaTitle,
-                             Price = x.Price
+                             Price = x.Price,
+                             PromotionPrice = x.PromotionPrice,
+                             TopHot = x.TopHot
                          });
             model.OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             return model.ToList();

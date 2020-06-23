@@ -1,4 +1,5 @@
-﻿using Models.EF;
+﻿using Common;
+using Models.EF;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,63 @@ namespace Models.DAO
             db = new LNBshopDbContext();
         }
         
-        public long Insert(Content entity)//tạo hàm chức năng Insert kiểu dữ liệu long vì trả về ID kiểu bigint
+        public long Insert(Content content)//tạo hàm chức năng Insert kiểu dữ liệu long vì trả về ID kiểu bigint
         {
-            db.Contents.Add(entity);//phương thức thêm trong entity
-            db.SaveChanges();//Lưu thay đổi trong database
-            return entity.ID;
+            //Xử lý alias
+            if (string.IsNullOrEmpty(content.MetaTitle))
+            {
+                content.MetaTitle = StringHelper.ToUnsignString(content.Name);
+            }
+            content.CreatedDate = DateTime.Now;
+            content.ViewCount = 0;
+            db.Contents.Add(content);
+            db.SaveChanges();
+
+            //Xử lý tag
+            if (!string.IsNullOrEmpty(content.Tags))
+            {
+                string[] tags = content.Tags.Split(',');
+                foreach (var tag in tags)
+                {
+                    var tagId = StringHelper.ToUnsignString(tag);
+                    var existedTag = this.CheckTag(tagId);
+
+                    //insert to to tag table
+                    if (!existedTag)
+                    {
+                        this.InsertTag(tagId, tag);
+                    }
+
+                    //insert to content tag
+                    this.InsertContentTag(content.ID, tagId);
+
+                }
+            }
+
+            return content.ID;
+        }
+
+        public void InsertTag(string id, string name)
+        {
+            var tag = new Tag();
+            tag.ID = id;
+            tag.Name = name;
+            db.Tags.Add(tag);
+            db.SaveChanges();
+        }
+
+        public void InsertContentTag(long contentId, string tagId)
+        {
+            var contentTag = new ContentTag();
+            contentTag.ContentID = contentId;
+            contentTag.TagID = tagId;
+            db.ContentTags.Add(contentTag);
+            db.SaveChanges();
+        }
+
+        public bool CheckTag(string id)
+        {
+            return db.Tags.Count(x => x.ID == id) > 0;
         }
 
         //Sửa
@@ -30,13 +83,16 @@ namespace Models.DAO
             try
             {
                 var content = db.Contents.Find(entity.ID);//tìm ID
-                if (!string.IsNullOrEmpty(entity.Detail))//kiểm tra nếu người dùng nhập Detail mới thực thi
+                                                          //Xử lý alias
+                if (string.IsNullOrEmpty(entity.MetaTitle))
+                {
+                    content.MetaTitle = StringHelper.ToUnsignString(content.Name);
+                }
+                if (!string.IsNullOrEmpty(entity.Detail))
                 {
                     content.Detail = entity.Detail;
                 }
-
                 content.Name = entity.Name;
-                content.MetaTitle = entity.MetaTitle;
                 content.Description = entity.Description;
                 content.CategoryID = entity.CategoryID;
 
@@ -51,12 +107,42 @@ namespace Models.DAO
                 content.Tags = entity.Tags;
                 content.Language = entity.Language;
                 db.SaveChanges();
+
+                //Xử lý tag
+                if (!string.IsNullOrEmpty(entity.Tags))
+                {
+                    this.RemoveAllContentTag(entity.ID);
+                    string[] tags = entity.Tags.Split(',');
+                    foreach (var tag in tags)
+                    {
+                        var tagId = StringHelper.ToUnsignString(tag);
+                        var existedTag = this.CheckTag(tagId);
+
+                        //insert to to tag table
+                        if (!existedTag)
+                        {
+                            this.InsertTag(tagId, tag);
+                        }
+
+                        //insert to content tag
+                        this.InsertContentTag(entity.ID, tagId);
+
+                    }
+                }
+
                 return true;
             }
-            catch (Exception ex)//xử lý các trường hợp ngoại lệ
+            catch(Exception)
             {
                 return false;
             }
+            
+        }
+
+        public void RemoveAllContentTag(long contentId)
+        {
+            db.ContentTags.RemoveRange(db.ContentTags.Where(x => x.ContentID == contentId));
+            db.SaveChanges();
         }
 
         //Xóa
@@ -103,8 +189,6 @@ namespace Models.DAO
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
-
-
 
         public int CountContentName(string contentName)//Kiểm tra tên đăng nhập có bị trùng lặp không
         {

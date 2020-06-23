@@ -1,0 +1,54 @@
+﻿@model Models.EF.Content
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <section id="aa-catg-head-banner">
+        <img src="~/Data/Image/Source/branch-store-1920x300.jpg" alt="source img">
+        <div class="aa-catg-head-banner-area">
+            <div class="container">
+                <div class="aa-catg-head-banner-content">
+                    <h2>Tin tức</h2>
+                    <ol class="breadcrumb">
+                        <li><a href="/">Home</a></li>
+                        <li class="active">@Model.Name</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <div class="aa-product-details-content">
+            <div class="row">
+                <!-- Modal view slider -->
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                    <div class="aa-product-view-slider">
+                        <div id="demo-1" class="simpleLens-gallery-container">
+                            <div class="simpleLens-container">
+                                <div class="simpleLens-big-image-container"><a data-lens-image="@Model.Image" class="simpleLens-lens-image"><img src="@Model.Image" class="simpleLens-big-image"></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal view content -->
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                    <div class="aa-product-view-content">
+                        <h3>@Model.Name</h3>
+                        <p>@Model.Description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-group">
+            @Html.Raw(Model.Detail)
+            Tags:
+            @{
+                var tags = (List<Models.EF.Tag>)ViewBag.Tags;
+                foreach (var tag in tags)
+                {
+                    <u><a href="/tag/@tag.ID">@tag.Name</a></u>
+                }
+            }
+        </div>
+    </div>
+

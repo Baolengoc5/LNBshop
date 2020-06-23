@@ -161,6 +161,7 @@
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ClientContentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -2426,6 +2427,9 @@
     <Content Include="Views\User\ConfirmEmail.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Product\Search.cshtml" />
+    <Content Include="Views\ClientContent\Index.cshtml" />
+    <Content Include="Views\ClientContent\Detail.cshtml" />
+    <Content Include="Views\ClientContent\Tag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

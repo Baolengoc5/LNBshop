@@ -1,4 +1,5 @@
-﻿using Models.DAO;
+﻿using LNBshop.Common;
+using Models.DAO;
 using Models.EF;
 using System;
 using System.Collections.Generic;
@@ -81,7 +82,9 @@ namespace LNBshop.Areas.Admin.Controllers
                         //, Path.GetFileName(Image.FileName)
                         string path = Path.Combine(Server.MapPath("~/Data/Image/Content/"));
                         string strExtexsion = Path.GetExtension(Path.GetFileName(Image.FileName)).Trim();
-                        content.CreatedDate = DateTime.Now;
+                        var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+                        content.ModifiedBy = session.UserName;
+                        content.ModifiedDate = DateTime.Now;
                         content.Status = true;
                         //Kiểm tra đuôi file ảnh
                         if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
@@ -190,6 +193,8 @@ namespace LNBshop.Areas.Admin.Controllers
                             //, Path.GetFileName(Image.FileName)
                             string path = Path.Combine(Server.MapPath("~/Data/Image/Content/"));
                             string strExtexsion = Path.GetExtension(Path.GetFileName(Image.FileName)).Trim();
+                            var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+                            content.CreatedBy = session.UserName;
                             content.CreatedDate = DateTime.Now;
                             content.Status = true;
                             //Kiểm tra đuôi file ảnh
