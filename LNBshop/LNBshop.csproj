@@ -2104,6 +2104,7 @@
     <Content Include="Assets\Admin\vendor\jquery\jquery.slim.min.js" />
     <Content Include="Assets\Client\css\bootstrap.css" />
     <Content Include="Assets\Client\css\font-awesome.css" />
+    <Content Include="Assets\Client\css\jquery-ui.css" />
     <Content Include="Assets\Client\css\jquery.simpleLens.css" />
     <Content Include="Assets\Client\css\jquery.smartmenus.bootstrap.css" />
     <Content Include="Assets\Client\css\nouislider.css" />
@@ -2124,9 +2125,11 @@
     <Content Include="Assets\Client\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\Client\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\Client\js\bootstrap.js" />
+    <Content Include="Assets\Client\js\Controller\baseController.js" />
     <Content Include="Assets\Client\js\Controller\cartController.js" />
     <Content Include="Assets\Client\js\Controller\userController.js" />
     <Content Include="Assets\Client\js\custom.js" />
+    <Content Include="Assets\Client\js\jquery-ui.js" />
     <Content Include="Assets\Client\js\jquery.simpleGallery.js" />
     <Content Include="Assets\Client\js\jquery.simpleLens.js" />
     <Content Include="Assets\Client\js\jquery.smartmenus.bootstrap.js" />
@@ -2422,6 +2425,7 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\ConfirmEmail.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Product\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

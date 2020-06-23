@@ -27,6 +27,9 @@
     <!-- Main style sheet -->
     <link href="~/Assets/Client/css/style.css" rel="stylesheet">
 
+    <!-- CSS Jquery -->
+    <link href="~/Assets/Client/css/jquery-ui.css" rel="stylesheet" />
+
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
@@ -96,7 +99,7 @@
                             <div class="aa-header-top-right">
                                 <ul class="aa-head-top-nav-right" id="topmenu-vue">
                                     @{
-                                        var session = (LNBshop.Common.UserLogin) Session[LNBshop.Common.CommonConstants.USER_SESSION];
+                                        var session = (LNBshop.Common.UserLogin)Session[LNBshop.Common.CommonConstants.USER_SESSION];
                                     }
                                     @if (session == null)
                                     {
@@ -105,8 +108,8 @@
                                     }
                                     else
                                     {
-                                            <li>Xin chào:@session.UserName</li>
-                                            <li>@Html.ActionLink("Đăng xuất", "Logout", "User")</li>
+                                        <li>Xin chào:@session.UserName</li>
+                                        <li>@Html.ActionLink("Đăng xuất", "Logout", "User")</li>
                                     }
                                 </ul>
                             </div>
@@ -158,8 +161,9 @@
                             <!-- / cart box -->
                             <!-- search box -->
                             <div class="aa-search-box">
-                                <form action="">
-                                    <input type="text" name="" id="" placeholder="Tìm kiếm ">
+
+                                <form action="/tim-kiem" method="get">
+                                    <input type="text" id="txtKeyword" name="keyword" placeholder="Gõ sản phẩm cần tìm">
                                     <button type="submit"><span class="fa fa-search"></span></button>
                                 </form>
                             </div>
@@ -289,38 +293,39 @@
 
     <!-- / footer -->
     <!--Script Vuejs-->
+    <!--Top menu-->
+    <script>
+        var TopMenuVue = new Vue({
+            el: '#topmenu-vue',
+            data: {
+                items: [
+                    { topmenu: '<a href="/dang-nhap" target="_self">Đăng nhập</a>' },
+                    { topmenu: '<a href="/dang-ky" target="_self">Đăng ký</a>' },
+                ]
+            }
+        })
+    </script>
 
-        <!--Top menu-->
-        <script>
-            var TopMenuVue = new Vue({
-                el: '#topmenu-vue',
-                data: {
-                    items: [
-                        { topmenu: '<a href="/dang-nhap" target="_self">Đăng nhập</a>' },
-                        { topmenu: '<a href="/dang-ky" target="_self">Đăng ký</a>' },
-                    ]
-                }
-            })
-        </script>
-
-        <!--Main menu-->
-        <script>
-            var MainMenuVue = new Vue({
-                el: '#mainmenu-vue',
-                data: {
-                    items: [
-                        { mainmenu: '<a href="/gioi-thieu" target="_self">Giới thiệu</a>' },
-                        { mainmenu: '<a href="/tin-tuc" target="_self">Tin tức</a>' },
-                        { mainmenu: '<a href="/san-pham" target="_self">Sản phẩm</a>' },
-                        { mainmenu: '<a href="/lien-he" target="_self">Liên hệ</a>' }
-                    ]
-                }
-            })
-        </script>
+    <!--Main menu-->
+    <script>
+        var MainMenuVue = new Vue({
+            el: '#mainmenu-vue',
+            data: {
+                items: [
+                    { mainmenu: '<a href="/gioi-thieu" target="_self">Giới thiệu</a>' },
+                    { mainmenu: '<a href="/tin-tuc" target="_self">Tin tức</a>' },
+                    { mainmenu: '<a href="/san-pham" target="_self">Sản phẩm</a>' },
+                    { mainmenu: '<a href="/lien-he" target="_self">Liên hệ</a>' }
+                ]
+            }
+        })
+    </script>
 
     <!-- / Script Vuejs-->
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script src="~/Assets/Client/js/jquery-ui.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="~/Assets/Client/js/bootstrap.js"></script>
     <!-- SmartMenus jQuery plugin -->
@@ -342,6 +347,8 @@
 
     <script src="/assets/client/js/controller/cartController.js"></script>
 
-    @RenderSection("jsfooter",required:false);
+    <script src="/assets/client/js/controller/baseController.js"></script>
+
+    @RenderSection("jsfooter", required: false);
 </body>
 </html>

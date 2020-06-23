@@ -3,3 +3,4 @@ D:\Baocaototnghiep\Source\LNBshop\Common\bin\Debug\Common.pdb
 D:\Baocaototnghiep\Source\LNBshop\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
 D:\Baocaototnghiep\Source\LNBshop\Common\obj\Debug\Common.dll
 D:\Baocaototnghiep\Source\LNBshop\Common\obj\Debug\Common.pdb
+D:\Baocaototnghiep\Source\LNBshop\Common\obj\Debug\Common.csprojAssemblyReference.cache

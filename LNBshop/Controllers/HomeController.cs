@@ -33,6 +33,7 @@ namespace LNBshop.Controllers
         }
 
         [ChildActionOnly]
+
         public PartialViewResult HeaderCart()
         {
             var cart = Session[CommonConstants.CartSession];

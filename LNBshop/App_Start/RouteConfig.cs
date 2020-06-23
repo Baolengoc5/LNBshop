@@ -37,6 +37,13 @@ namespace LNBshop
             );
 
             routes.MapRoute(
+                name: "Search",
+                url: "tim-kiem",
+                defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional },
+                new[] { "LNBshop.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "All Product",
                 url: "san-pham",
                 defaults: new { controller = "Product", action = "Index", id = UrlParameter.Optional },

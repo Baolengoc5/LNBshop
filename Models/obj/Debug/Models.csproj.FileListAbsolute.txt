@@ -13,4 +13,3 @@ D:\Baocaototnghiep\Source\LNBshop\Models\obj\Debug\Models.csproj.CoreCompileInpu
 D:\Baocaototnghiep\Source\LNBshop\Models\obj\Debug\Models.csproj.CopyComplete
 D:\Baocaototnghiep\Source\LNBshop\Models\obj\Debug\Models.dll
 D:\Baocaototnghiep\Source\LNBshop\Models\obj\Debug\Models.pdb
-D:\Baocaototnghiep\Source\LNBshop\Models\obj\Debug\Models.csprojAssemblyReference.cache
