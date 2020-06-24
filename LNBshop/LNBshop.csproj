@@ -159,6 +159,8 @@
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\Encryptor.cs" />
+    <Compile Include="Common\HasCredentialAttribute.cs" />
+    <Compile Include="Common\HasPaymentCredentialAttribute.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ClientContentController.cs" />
@@ -2388,6 +2390,7 @@
     <Content Include="Areas\Admin\Views\ContentCategory\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ContentCategory\Create.cshtml" />
     <Content Include="Areas\Admin\Views\ContentCategory\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\401.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2440,6 +2443,7 @@
     <Folder Include="Data\Image\Slide\" />
     <Folder Include="Data\Image\Source\" />
     <Folder Include="Views\Email\" />
+    <Folder Include="Views\Payment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

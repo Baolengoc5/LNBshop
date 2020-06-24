@@ -12,5 +12,6 @@ namespace LNBshop.Common
         //2 trường để lưu session
         public long UserID { set; get; }
         public string UserName { set; get; }
+        public string GroupID { set; get; }
     }
 }

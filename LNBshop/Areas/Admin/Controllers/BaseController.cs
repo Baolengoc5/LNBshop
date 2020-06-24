@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Common;
 
 namespace LNBshop.Areas.Admin.Controllers
 {
@@ -16,12 +17,24 @@ namespace LNBshop.Areas.Admin.Controllers
         {
             //khai báo biến session và gán cho key Session USER_SESSION ép kiểu UserLogin
             var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+
             //Kiểm tra bộ lọc chuyển hướng
             if (session == null)//kiểm tra nếu không có session tức chưa đăng nhập sẽ chuyển sang trang Login
             {
+                
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary(new { Controller = "Login", Action = "Index", Areas = "Admin" })
                     );
+            }
+            else
+            {
+                if (session.GroupID == CommonConstantss.MEMBER_GROUP)
+                {
+                    Session[CommonConstants.USER_SESSION] = null;
+                    filterContext.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary(new { Controller = "Login", Action = "Index", Areas = "Admin" })
+                    );
+                }
             }
             base.OnActionExecuting(filterContext);
         }

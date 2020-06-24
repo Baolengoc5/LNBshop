@@ -137,6 +137,26 @@ namespace Models.DAO
             }
         }
 
+        public List<string> GetListCredential(string userName)
+        {
+            var user = db.Users.Single(x => x.UserName == userName);
+            var data = (from a in db.Credentials
+                        join b in db.UserGroups on a.UserGroupID equals b.ID
+                        join c in db.Roles on a.RoleID equals c.ID
+                        where b.ID == user.GroupID
+                        select new
+                        {
+                            RoleID = a.RoleID,
+                            UserGroupID = a.UserGroupID
+                        }).AsEnumerable().Select(x => new Credential()
+                        {
+                            RoleID = x.RoleID,
+                            UserGroupID = x.UserGroupID
+                        });
+            return data.Select(x => x.RoleID).ToList();
+
+        }
+
         // Lấy SESSION
         public User GetByUserName(string userName)//để lấy thông tin user thông qua userName để làm session 
         {

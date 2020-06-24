@@ -13,6 +13,7 @@ namespace LNBshop.Areas.Admin.Controllers
     public class UserController : BaseController
     {
         // GET: Admin/User
+        [HasCredential(RoleID = "VIEW_USER")]
         public ActionResult Index(string searchString, int page = 1, int pageSize = 4)
         {
             var dao = new UserDao();
@@ -24,10 +25,14 @@ namespace LNBshop.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [HasCredential(RoleID = "ADD_USER")]
         public ActionResult Create()
         {
             return View();
         }
+
+        [HasCredential(RoleID = "EDIT_USER")]
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -38,6 +43,8 @@ namespace LNBshop.Areas.Admin.Controllers
             return View(user);
         }
         [HttpPost]
+        [HasCredential(RoleID = "ADD_USER")]
+
         public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
@@ -71,6 +78,8 @@ namespace LNBshop.Areas.Admin.Controllers
 
         }
         [HttpPost]
+        [HasCredential(RoleID = "EDIT_USER")]
+
         public ActionResult Edit(User user)
         {
             
@@ -97,6 +106,8 @@ namespace LNBshop.Areas.Admin.Controllers
         }
 
         [HttpDelete]
+        [HasCredential(RoleID = "DELETE_USER")]
+
         public ActionResult Delete(int id)
         {
             new UserDao().Detele(id);

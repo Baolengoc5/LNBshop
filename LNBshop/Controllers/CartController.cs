@@ -1,4 +1,5 @@
 ﻿using Common;
+using LNBshop.Common;
 using LNBshop.Models;
 using Models.DAO.Client;
 using Models.EF;
@@ -111,6 +112,7 @@ namespace LNBshop.Controllers
         }
 
         [HttpGet]
+        [HasPaymentCredential()]
         public ActionResult Payment()
         {
             var cart = Session[CartSession];

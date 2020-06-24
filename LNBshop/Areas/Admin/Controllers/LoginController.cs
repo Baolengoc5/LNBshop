@@ -31,8 +31,13 @@ namespace LNBshop.Areas.Admin.Controllers
                     //Lưu username với ID vào biến được tạo
                     userSession.UserName = User.UserName;
                     userSession.UserID = User.ID;
+                    userSession.GroupID = User.GroupID;
+
+
+                    var listCredentials = dao.GetListCredential(model.UserName);
 
                     //Lưu SESSION
+                    Session.Add(CommonConstants.SESSION_CREDENTIALS, listCredentials);
                     Session.Add(CommonConstants.USER_SESSION, userSession);
                     //Chuyển trang tới nơi yêu cầu
                     return RedirectToAction("Index","Home");
