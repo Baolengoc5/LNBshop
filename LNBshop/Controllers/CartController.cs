@@ -131,7 +131,7 @@ namespace LNBshop.Controllers
         {
             var order = new Order();
             order.CreatedDate = DateTime.Now;
-            order.Status = 0;
+            order.Status = false;
             order.ShipAddress = address;
             order.ShipMobile = mobile;
             order.ShipName = shipName;
